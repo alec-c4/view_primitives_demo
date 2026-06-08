@@ -1,0 +1,53 @@
+# frozen_string_literal: true
+
+module UI
+  class DropdownMenuComponent < ApplicationComponent
+    renders_one :trigger
+
+    PANEL = "absolute z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 " \
+            "text-popover-foreground shadow-md"
+
+    ALIGN = {
+      start: "top-full left-0 mt-1",
+      end:   "top-full right-0 mt-1"
+    }.freeze
+
+    ITEM      = "relative flex w-full cursor-default select-none items-center gap-2 rounded-sm " \
+                "px-2 py-1.5 text-sm outline-none " \
+                "hover:bg-accent hover:text-accent-foreground " \
+                "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 " \
+                "[&_svg:not([class*='text-'])]:text-muted-foreground"
+    SEPARATOR = "-mx-1 my-1 h-px bg-border"
+    LABEL_CLS = "px-2 py-1.5 text-sm font-medium"
+
+    def initialize(align: :start, **html_attrs)
+      @align       = align.to_sym
+      @extra_class = html_attrs.delete(:class)
+      @html_attrs  = html_attrs
+    end
+
+    def call
+      content_tag(:div,
+        class: "relative inline-block",
+        data: {
+          controller: "dropdown",
+          action: "click@document->dropdown#closeOnClickOutside"
+        },
+        **@html_attrs) do
+        concat content_tag(:span, trigger, data: { action: "click->dropdown#toggle" }, class: "contents") if trigger
+        concat panel
+      end
+    end
+
+    private
+
+    def panel
+      content_tag(:div,
+        data: { dropdown_target: "panel" },
+        hidden: true,
+        class: cn(PANEL, ALIGN.fetch(@align, ALIGN[:start]), @extra_class)) do
+        concat content
+      end
+    end
+  end
+end
