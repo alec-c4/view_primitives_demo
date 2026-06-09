@@ -9,29 +9,27 @@ module UI
     # placeholder: displayed when no date is selected (default: "Pick a date")
     # min/max:     Date bounds passed to the calendar
 
-    WRAPPER = "relative inline-block"
-    TRIGGER = "flex h-9 w-48 cursor-pointer items-center gap-2 rounded-md border border-input " \
-               "bg-background px-3 text-sm text-foreground shadow-xs " \
-               "focus-visible:ring-[3px] focus-visible:ring-ring/50 outline-none transition " \
-               "aria-expanded:border-ring"
-    ICON_CLS = "size-4 shrink-0 text-muted-foreground"
-    POPOVER = "absolute left-0 top-full z-50 mt-1 hidden w-max rounded-lg border border-border " \
-               "bg-popover p-0 shadow-md data-[open=true]:block"
+    WRAPPER  = "relative inline-block"
+    TRIGGER  = "#{UI::Styles::PICKER_TRIGGER} w-48"
+    ICON_CLS = "size-4 shrink-0 text-muted-foreground pointer-events-none"
+    LABEL_PLACEHOLDER = "text-muted-foreground"
+    # Positioning shell only — visual chrome comes from CalendarComponent::CONTAINER
+    POPOVER  = "absolute left-0 top-full z-50 mt-2 hidden w-max data-[open=true]:block"
 
     def initialize(value: nil, name: nil, placeholder: "Pick a date", min: nil, max: nil, **html_attrs)
-      @value = value
-      @name = name
+      @value       = value
+      @name        = name
       @placeholder = placeholder
-      @min = min
-      @max = max
+      @min         = min
+      @max         = max
       @extra_class = html_attrs.delete(:class)
-      @html_attrs = html_attrs
+      @html_attrs  = html_attrs
     end
 
     def call
       content_tag(:div,
         class: cn(WRAPPER, @extra_class),
-        data: {controller: "date-picker"},
+        data: { controller: "date-picker" },
         **@html_attrs) do
         concat hidden_input if @name
         concat trigger_button
@@ -44,7 +42,7 @@ module UI
     def hidden_input
       tag.input(type: "hidden", name: @name,
         value: @value&.iso8601,
-        data: {date_picker_target: "hidden"})
+        data: { date_picker_target: "hidden" })
     end
 
     def trigger_button
@@ -58,7 +56,9 @@ module UI
           action: "click->date-picker#toggle"
         }) do
         concat calendar_icon
-        concat content_tag(:span, label_text, data: {date_picker_target: "label"})
+        concat content_tag(:span, label_text,
+          class: (@value ? nil : LABEL_PLACEHOLDER),
+          data: { date_picker_target: "label" })
       end
     end
 

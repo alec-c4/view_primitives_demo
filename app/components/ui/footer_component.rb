@@ -2,15 +2,16 @@
 
 module UI
   class FooterComponent < ApplicationComponent
-    BASE = "border-t bg-background"
-    LINK = "text-sm text-muted-foreground hover:text-foreground transition-colors"
+    BASE = "border-t border-border bg-background"
+    LINK = "inline-flex rounded-md px-1 py-0.5 text-sm text-muted-foreground transition-colors " \
+           "outline-none hover:text-foreground #{UI::Styles::FOCUS_RING}"
 
     # columns: [{ title:, links: [{ label:, href: }] }]
     def initialize(copyright: nil, columns: [], **html_attrs)
       @copyright = copyright
-      @columns = columns
+      @columns   = columns
       @extra_class = html_attrs.delete(:class)
-      @html_attrs = html_attrs
+      @html_attrs  = html_attrs
     end
 
     def call
@@ -33,7 +34,7 @@ module UI
 
     def column(col)
       content_tag(:div) do
-        concat content_tag(:h3, col[:title], class: "mb-3 text-sm font-semibold text-foreground")
+        concat content_tag(:h3, col[:title], class: "mb-3 text-sm font-medium text-foreground")
         concat content_tag(:ul, class: "space-y-2") {
           safe_join((col[:links] || []).map { |link|
             content_tag(:li) { content_tag(:a, link[:label], href: link[:href], class: LINK) }
@@ -43,7 +44,7 @@ module UI
     end
 
     def copyright_row
-      content_tag(:div, class: "border-t pt-8 mt-8 text-center") do
+      content_tag(:div, class: "mt-8 border-t border-border pt-8 text-center") do
         content_tag(:p, @copyright, class: "text-sm text-muted-foreground")
       end
     end

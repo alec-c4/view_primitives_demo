@@ -2,9 +2,10 @@
 
 module UI
   class PaginationComponent < ApplicationComponent
-    ITEM   = "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium " \
-             "transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring " \
-             "h-9 w-9 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground"
+    ITEM   = "inline-flex h-9 w-9 items-center justify-center whitespace-nowrap rounded-md border border-input " \
+             "bg-background text-sm font-medium shadow-xs transition-colors outline-none " \
+             "hover:bg-accent hover:text-accent-foreground " \
+             "#{UI::Styles::FOCUS_RING}"
     ACTIVE = "bg-primary text-primary-foreground shadow hover:bg-primary/90 border-transparent"
     MUTED  = "cursor-not-allowed opacity-50 pointer-events-none"
 
@@ -24,7 +25,7 @@ module UI
 
       content_tag(:nav, "aria-label": "Pagination", **@html_attrs) do
         content_tag(:ul, class: cn("flex items-center gap-1", @extra_class)) do
-          safe_join([ prev_item, *page_items, next_item ])
+          safe_join([prev_item, *page_items, next_item])
         end
       end
     end
@@ -75,10 +76,10 @@ module UI
     def pages
       return (1..@total).to_a if @total <= (@window * 2 + 5)
 
-      left  = [ @current - @window, 1 ].max
-      right = [ @current + @window, @total ].min
+      left  = [@current - @window, 1].max
+      right = [@current + @window, @total].min
 
-      result = [ 1 ]
+      result = [1]
       result << :ellipsis if left > 2
       result.concat((left..right).to_a)
       result << :ellipsis if right < @total - 1

@@ -1,5 +1,8 @@
-<div class="min-h-screen bg-background text-foreground">
-  <div class="max-w-6xl mx-auto px-6 py-12 space-y-16">
+<div class="min-h-screen bg-background text-foreground flex">
+  <%= render "demo/sidebar" %>
+
+  <div class="pl-56 w-full">
+  <div class="max-w-4xl mx-auto px-8 py-12 space-y-16">
 
     <header>
       <h1 class="text-3xl font-bold tracking-tight">ViewPrimitives demo</h1>
@@ -7,115 +10,10 @@
     </header>
 
     <%# ------------------------------------------------------------------ %>
-    <%# BUTTON %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-6">
-      <h2 class="text-xl font-semibold border-b pb-2">Button</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Variants</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "button", "Default" %>
-          <%= ui "button", "Destructive", variant: :destructive %>
-          <%= ui "button", "Outline",     variant: :outline %>
-          <%= ui "button", "Secondary",   variant: :secondary %>
-          <%= ui "button", "Ghost",       variant: :ghost %>
-          <%= ui "button", "Link",        variant: :link %>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Sizes</h3>
-        <div class="flex flex-wrap items-center gap-3">
-          <%= ui "button", "Small",   size: :sm %>
-          <%= ui "button", "Default", size: :default %>
-          <%= ui "button", "Large",   size: :lg %>
-          <%= ui "button", size: :icon do %>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          <% end %>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">As link (href:)</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "button", "Go to /up", href: "/up", variant: :outline %>
-          <%= ui "button", "Ghost link", href: "/up", variant: :ghost %>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">label: keyword</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "button", label: "Keyword label" %>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Disabled</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "button", "Disabled", disabled: true %>
-          <%= ui "button", "Disabled outline", variant: :outline, disabled: true %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# ALERT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Alert</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">kwargs (plain text)</h3>
-        <%= ui "alert", title: "Heads up!", description: "You can change this in your account settings." %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Destructive variant</h3>
-        <%= ui "alert", variant: :destructive,
-                        title: "Error",
-                        description: "Your session has expired. Please log in again." %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Title only</h3>
-        <%= ui "alert", title: "Maintenance scheduled for Sunday 02:00 UTC." %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With icon</h3>
-        <%= ui "alert", variant: :destructive do |alert| %>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/>
-            <line x1="12" x2="12.01" y1="16" y2="16"/>
-          </svg>
-          <% alert.with_alert_title { "Something went wrong" } %>
-          <% alert.with_alert_description { "Please try again or contact support." } %>
-        <% end %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Rich description via slot</h3>
-        <%= ui "alert", title: "Action required" do |alert| %>
-          <% alert.with_alert_description do %>
-            Please review the
-            <a href="/up" class="font-medium underline underline-offset-4">terms of service</a>
-            before continuing.
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
     <%# ACCORDION %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-6">
-      <h2 class="text-xl font-semibold border-b pb-2">Accordion</h2>
+    <section id="accordion" class="space-y-6">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Accordion</h2>
 
       <div>
         <h3 class="text-sm font-medium text-muted-foreground mb-3">Default (multiple open)</h3>
@@ -185,533 +83,80 @@
     <%# ================================================================== %>
 
     <%# ------------------------------------------------------------------ %>
-    <%# INPUT %>
+    <%# ALERT %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Input</h2>
-
-      <div class="max-w-sm space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Text</h3>
-          <%= ui "input", placeholder: "Email address" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Password</h3>
-          <%= ui "input", type: "password", placeholder: "Password" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Disabled</h3>
-          <%= ui "input", placeholder: "Can't touch this", disabled: true %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With value</h3>
-          <%= ui "input", value: "alice@example.com" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TEXTAREA %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Textarea</h2>
-
-      <div class="max-w-sm space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
-          <%= ui "textarea", placeholder: "Write something..." %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Taller</h3>
-          <%= ui "textarea", placeholder: "Longer content...", class: "min-h-[160px]" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Disabled</h3>
-          <%= ui "textarea", placeholder: "Read only", disabled: true %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# CHECKBOX %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Checkbox</h2>
-
-      <div class="space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With label</h3>
-          <%= ui "checkbox", label: "Accept terms and conditions", name: "terms", id: "terms" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Pre-checked</h3>
-          <%= ui "checkbox", label: "Subscribe to newsletter", name: "newsletter", checked: true %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Without label (standalone)</h3>
-          <%= ui "checkbox", name: "standalone" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# RADIO GROUP %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Radio Group</h2>
-
-      <div class="space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
-          <%= ui "radio_group", name: "plan", items: [
-            { value: "free",    label: "Free" },
-            { value: "pro",     label: "Pro" },
-            { value: "team",    label: "Team", checked: true }
-          ] %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SELECT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Select</h2>
-
-      <div class="max-w-sm space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Array of strings</h3>
-          <%= ui "select", options: %w[Apple Banana Cherry], name: "fruit" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Value/label pairs</h3>
-          <%= ui "select",
-            options: [["us", "United States"], ["gb", "United Kingdom"], ["de", "Germany"]],
-            selected: "gb",
-            name: "country" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With blank option</h3>
-          <%= ui "select",
-            options: %w[Design Engineering Marketing],
-            include_blank: true,
-            name: "department" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SWITCH %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Switch</h2>
-
-      <div class="space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Off (default)</h3>
-          <%= ui "switch", label: "Dark mode", name: "dark_mode" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">On</h3>
-          <%= ui "switch", label: "Notifications enabled", name: "notifications", checked: true %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Without label</h3>
-          <%= ui "switch", name: "silent" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TOGGLE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Toggle</h2>
-
-      <div class="space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default (not pressed)</h3>
-          <div class="flex gap-2">
-            <%= ui "toggle", "Bold" %>
-            <%= ui "toggle", "Italic", pressed: true %>
-            <%= ui "toggle", "Underline" %>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Sizes</h3>
-          <div class="flex items-center gap-2">
-            <%= ui "toggle", "Sm", size: :sm %>
-            <%= ui "toggle", "Default" %>
-            <%= ui "toggle", "Lg", size: :lg %>
-          </div>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With icon</h3>
-          <%= ui "toggle" do %>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
-            </svg>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TOGGLE GROUP %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Toggle Group</h2>
-
-      <div class="space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Single selection</h3>
-          <%= ui "toggle_group", type: :single, value: "center" do %>
-            <%= ui "toggle", "Left",   value: "left" %>
-            <%= ui "toggle", "Center", value: "center", pressed: true %>
-            <%= ui "toggle", "Right",  value: "right" %>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Multiple selection</h3>
-          <%= ui "toggle_group", type: :multiple, value: ["bold", "underline"] do %>
-            <%= ui "toggle", "Bold",      value: "bold",      pressed: true %>
-            <%= ui "toggle", "Italic",    value: "italic" %>
-            <%= ui "toggle", "Underline", value: "underline", pressed: true %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# FORM FIELD %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Form Field</h2>
-
-      <div class="max-w-sm space-y-4">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Label + hint</h3>
-          <%= ui "form_field", label: "Username", hint: "Letters and numbers only." do %>
-            <%= ui "input", name: "username", placeholder: "alice" %>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Required</h3>
-          <%= ui "form_field", label: "Email", required: true do %>
-            <%= ui "input", type: "email", name: "email", placeholder: "you@example.com" %>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With validation error</h3>
-          <%= ui "form_field", label: "Password", error: "is too short (minimum 8 characters)" do %>
-            <%= ui "input", type: "password", name: "password", class: "border-destructive focus-visible:ring-destructive" %>
-          <% end %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Complete form example</h3>
-          <%= form_with url: "/up", method: :post, class: "space-y-4" do %>
-            <%= ui "form_field", label: "Full name", required: true do %>
-              <%= ui "input", name: "name", placeholder: "Alice Smith" %>
-            <% end %>
-            <%= ui "form_field", label: "Bio", hint: "Max 200 characters." do %>
-              <%= ui "textarea", name: "bio", placeholder: "Tell us about yourself..." %>
-            <% end %>
-            <%= ui "form_field", label: "Country" do %>
-              <%= ui "select", options: [["us", "United States"], ["gb", "United Kingdom"]], name: "country" %>
-            <% end %>
-            <%= ui "checkbox", label: "I agree to the terms", name: "terms" %>
-            <div class="flex gap-2">
-              <%= ui "button", "Save", type: "submit" %>
-              <%= ui "button", "Cancel", variant: :outline %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# FILE INPUT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">File Input</h2>
-      <div class="flex flex-wrap gap-6 max-w-lg">
-        <div class="w-full">
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Single file</h3>
-          <%= ui :file_input, name: "avatar" %>
-        </div>
-        <div class="w-full">
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Multiple images</h3>
-          <%= ui :file_input, name: "photos[]", multiple: true, accept: "image/*" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SEARCH INPUT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Search Input</h2>
-      <div class="max-w-sm space-y-3">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
-          <%= ui :search_input, name: "q" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Custom placeholder</h3>
-          <%= ui :search_input, name: "q", placeholder: "Search components…" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# NUMBER INPUT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Number Input</h2>
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
-          <%= ui :number_input, name: "qty", value: 1 %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">With min/max/step</h3>
-          <%= ui :number_input, name: "age", value: 18, min: 0, max: 120, step: 1 %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# RANGE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Range</h2>
-      <div class="max-w-sm space-y-4">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default (0–100)</h3>
-          <%= ui :range, name: "volume", value: 40 %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Custom step</h3>
-          <%= ui :range, name: "opacity", min: 0, max: 1, step: 0.1, value: 0.7 %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# FLOATING LABEL %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Floating Label</h2>
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Text</h3>
-          <%= ui :floating_label, label: "Full name", id: "fl_name", name: "name" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Email</h3>
-          <%= ui :floating_label, label: "Email address", type: "email", id: "fl_email", name: "email" %>
-        </div>
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-2">Password</h3>
-          <%= ui :floating_label, label: "Password", type: "password", id: "fl_pass", name: "password" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ================================================================== %>
-    <%# PHASE 2 — DISPLAY %>
-    <%# ================================================================== %>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# BADGE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Badge</h2>
+    <section id="alert" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Alert</h2>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Variants</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "badge", "Default" %>
-          <%= ui "badge", "Secondary",   variant: :secondary %>
-          <%= ui "badge", "Destructive", variant: :destructive %>
-          <%= ui "badge", "Outline",     variant: :outline %>
-        </div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">kwargs (plain text)</h3>
+        <%= ui "alert", title: "Heads up!", description: "You can change this in your account settings." %>
       </div>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">label: keyword + block</h3>
-        <div class="flex flex-wrap gap-3">
-          <%= ui "badge", label: "Keyword" %>
-          <%= ui "badge", variant: :secondary do %>Block content<% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# AVATAR %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Avatar</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With image</h3>
-        <div class="flex flex-wrap items-center gap-4">
-          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=1", alt: "Alice", size: :sm %>
-          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=2", alt: "Bob" %>
-          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=3", alt: "Carol", size: :lg %>
-        </div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Destructive variant</h3>
+        <%= ui "alert", variant: :destructive,
+                        title: "Error",
+                        description: "Your session has expired. Please log in again." %>
       </div>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Initials fallback</h3>
-        <div class="flex flex-wrap items-center gap-4">
-          <%= ui "avatar", fallback: "Jane Doe", size: :sm %>
-          <%= ui "avatar", fallback: "John Smith" %>
-          <%= ui "avatar", alt: "Alex Kim", size: :lg %>
-        </div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Title only</h3>
+        <%= ui "alert", title: "Maintenance scheduled for Sunday 02:00 UTC." %>
       </div>
-    </section>
 
-    <%# ------------------------------------------------------------------ %>
-    <%# CARD %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Card</h2>
-
-      <div class="max-w-sm">
-        <%= ui "card" do %>
-          <%= ui "card_header" do %>
-            <%= ui "card_title", "Create project" %>
-            <%= ui "card_description", "Deploy your new project in one click." %>
-          <% end %>
-          <%= ui "card_content" do %>
-            <p class="text-sm text-muted-foreground">Your project will be deployed using the default configuration.</p>
-          <% end %>
-          <%= ui "card_footer" do %>
-            <%= ui "button", "Deploy", class: "w-full" %>
-          <% end %>
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With icon</h3>
+        <%= ui "alert", variant: :destructive do |alert| %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><line x1="12" x2="12" y1="8" y2="12"/>
+            <line x1="12" x2="12.01" y1="16" y2="16"/>
+          </svg>
+          <% alert.with_alert_title { "Something went wrong" } %>
+          <% alert.with_alert_description { "Please try again or contact support." } %>
         <% end %>
       </div>
 
-      <div class="max-w-sm">
-        <%= ui "card" do %>
-          <%= ui "card_header" do %>
-            <%= ui "card_title", label: "Notifications" %>
-            <%= ui "card_description", "You have 3 unread messages." %>
-          <% end %>
-          <%= ui "card_content" do %>
-            <div class="space-y-2 text-sm">
-              <p>New comment on your post</p>
-              <p>Your subscription renews tomorrow</p>
-              <p>Welcome to ViewPrimitives!</p>
-            </div>
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Rich description via slot</h3>
+        <%= ui "alert", title: "Action required" do |alert| %>
+          <% alert.with_alert_description do %>
+            Please review the
+            <a href="/up" class="font-medium underline underline-offset-4">terms of service</a>
+            before continuing.
           <% end %>
         <% end %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# SEPARATOR %>
+    <%# ALERT DIALOG %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Separator</h2>
+    <section id="alert-dialog" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Alert Dialog</h2>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal (default)</h3>
-        <div class="space-y-2">
-          <p class="text-sm">Above the line</p>
-          <%= ui "separator" %>
-          <p class="text-sm">Below the line</p>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical</h3>
-        <div class="flex h-8 items-center gap-4">
-          <span class="text-sm">Left</span>
-          <%= ui "separator", orientation: :vertical %>
-          <span class="text-sm">Right</span>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# LABEL %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Label</h2>
-
-      <div class="space-y-3 max-w-sm">
-        <div class="space-y-1">
-          <%= ui "label", "Email address", for: "demo-email" %>
-          <input id="demo-email" type="email" placeholder="you@example.com"
-                 class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm">
-        </div>
-        <div class="space-y-1">
-          <%= ui "label", label: "Password", for: "demo-password" %>
-          <input id="demo-password" type="password" placeholder="••••••••"
-                 class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm">
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SKELETON %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Skeleton</h2>
-
-      <div class="flex items-center gap-4 max-w-sm">
-        <%= ui "skeleton", class: "size-10 rounded-full" %>
-        <div class="flex-1 space-y-2">
-          <%= ui "skeleton", class: "h-4 w-full" %>
-          <%= ui "skeleton", class: "h-4 w-3/4" %>
-        </div>
-      </div>
-
-      <div class="max-w-sm space-y-2">
-        <%= ui "skeleton", class: "h-40 w-full rounded-xl" %>
-        <%= ui "skeleton", class: "h-4 w-full" %>
-        <%= ui "skeleton", class: "h-4 w-2/3" %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# PROGRESS %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Progress</h2>
-
-      <div class="space-y-3 max-w-sm">
-        <div>
-          <p class="text-sm text-muted-foreground mb-1">0%</p>
-          <%= ui "progress", value: 0 %>
-        </div>
-        <div>
-          <p class="text-sm text-muted-foreground mb-1">33%</p>
-          <%= ui "progress", value: 33 %>
-        </div>
-        <div>
-          <p class="text-sm text-muted-foreground mb-1">75%</p>
-          <%= ui "progress", value: 75 %>
-        </div>
-        <div>
-          <p class="text-sm text-muted-foreground mb-1">100%</p>
-          <%= ui "progress", value: 100 %>
-        </div>
-        <div>
-          <p class="text-sm text-muted-foreground mb-1">3 of 10 (custom max)</p>
-          <%= ui "progress", value: 3, max: 10 %>
-        </div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Destructive confirmation</h3>
+        <%= ui :alert_dialog,
+              title: "Are you absolutely sure?",
+              description: "This action cannot be undone. This will permanently delete your account and remove your data from our servers." do |d| %>
+          <% d.with_trigger do %>
+            <%= ui :button, "Delete Account", variant: :destructive %>
+          <% end %>
+          <% d.with_footer do %>
+            <%= ui :button, "Cancel", variant: :outline, data: { action: "click->dialog#close" } %>
+            <%= ui :button, "Yes, delete account", variant: :destructive, data: { action: "click->dialog#close" } %>
+          <% end %>
+        <% end %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
     <%# ASPECT RATIO %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Aspect Ratio</h2>
+    <section id="aspect-ratio" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Aspect Ratio</h2>
 
       <div>
         <h3 class="text-sm font-medium text-muted-foreground mb-3">16:9 — video embed placeholder</h3>
@@ -748,177 +193,85 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# SPINNER %>
+    <%# AUDIO %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Spinner</h2>
+    <section id="audio" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Audio</h2>
 
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Sizes</h3>
-        <div class="flex items-center gap-6">
-          <%= ui "spinner", size: :sm %>
-          <%= ui "spinner" %>
-          <%= ui "spinner", size: :lg %>
+      <div class="space-y-4">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">With controls</h3>
+          <%= ui :audio, controls: true, class: "w-full" do |a| %>
+            <% a.with_source(src: "https://www.w3schools.com/html/horse.ogg", type: "audio/ogg") %>
+            <% a.with_source(src: "https://www.w3schools.com/html/horse.mp3", type: "audio/mpeg") %>
+            Your browser does not support the audio element.
+          <% end %>
         </div>
-      </div>
 
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With button (loading state)</h3>
-        <div class="flex items-center gap-3">
-          <%= ui "button", variant: :outline, disabled: true do %>
-            <%= ui "spinner", size: :sm, class: "mr-2" %>
-            Saving…
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Looping</h3>
+          <%= ui :audio, controls: true, loop: true, class: "w-full" do |a| %>
+            <% a.with_source(src: "https://www.w3schools.com/html/horse.mp3", type: "audio/mpeg") %>
           <% end %>
         </div>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# KBD %>
+    <%# AVATAR %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">KBD</h2>
+    <section id="avatar" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Avatar</h2>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Single keys</h3>
-        <div class="flex flex-wrap items-center gap-2">
-          <%= ui "kbd", "⌘" %>
-          <%= ui "kbd", "K" %>
-          <%= ui "kbd", "Enter" %>
-          <%= ui "kbd", "Esc" %>
-          <%= ui "kbd", "Tab" %>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With image</h3>
+        <div class="flex flex-wrap items-center gap-4">
+          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=1", alt: "Alice", size: :sm %>
+          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=2", alt: "Bob" %>
+          <%= ui "avatar", src: "https://i.pravatar.cc/48?img=3", alt: "Carol", size: :lg %>
         </div>
       </div>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Shortcut combination</h3>
-        <div class="flex items-center gap-1 text-sm text-muted-foreground">
-          Press
-          <%= ui "kbd", "⌘" %>
-          +
-          <%= ui "kbd", "K" %>
-          to open the command palette.
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Initials fallback</h3>
+        <div class="flex flex-wrap items-center gap-4">
+          <%= ui "avatar", fallback: "Jane Doe", size: :sm %>
+          <%= ui "avatar", fallback: "John Smith" %>
+          <%= ui "avatar", alt: "Alex Kim", size: :lg %>
         </div>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# RATING %>
+    <%# BADGE %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Rating</h2>
+    <section id="badge" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Badge</h2>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Integer values</h3>
-        <div class="flex flex-col gap-2">
-          <%= ui "rating", value: 0 %>
-          <%= ui "rating", value: 2 %>
-          <%= ui "rating", value: 4 %>
-          <%= ui "rating", value: 5 %>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Variants</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "badge", "Default" %>
+          <%= ui "badge", "Secondary",   variant: :secondary %>
+          <%= ui "badge", "Destructive", variant: :destructive %>
+          <%= ui "badge", "Outline",     variant: :outline %>
         </div>
       </div>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom max</h3>
-        <%= ui "rating", value: 3, max: 10 %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# RATING INPUT %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Rating Input</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Standalone (hover to preview)</h3>
-        <%= ui "rating_input", value: 3 %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Inside a form (name: sets hidden input)</h3>
-        <div class="max-w-xs space-y-3">
-          <%= form_with url: "/up", method: :post do |f| %>
-            <div class="space-y-1">
-              <p class="text-sm text-muted-foreground">How would you rate this component?</p>
-              <%= ui "rating_input", value: 0, name: "review[rating]" %>
-            </div>
-            <%= ui "button", "Submit", type: "submit", size: :sm %>
-          <% end %>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">label: keyword + block</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "badge", label: "Keyword" %>
+          <%= ui "badge", variant: :secondary do %>Block content<% end %>
         </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom max</h3>
-        <%= ui "rating_input", value: 6, max: 10 %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# INDICATOR %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Indicator</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Dot (no count)</h3>
-        <div class="flex items-center gap-6">
-          <%= ui "indicator" do %>
-            <%= ui "avatar", fallback: "Alice" %>
-          <% end %>
-          <%= ui "indicator", variant: :destructive do %>
-            <%= ui "avatar", fallback: "Bob" %>
-          <% end %>
-          <%= ui "indicator", variant: :success do %>
-            <%= ui "avatar", fallback: "Carol" %>
-          <% end %>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With count</h3>
-        <div class="flex items-center gap-6">
-          <%= ui "indicator", count: 3 do %>
-            <%= ui "button", "Inbox", variant: :outline %>
-          <% end %>
-          <%= ui "indicator", count: 99, variant: :destructive do %>
-            <%= ui "button", "Notifications", variant: :outline %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# LIST GROUP %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">List Group</h2>
-
-      <div class="max-w-xs">
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Plain list</h3>
-        <%= ui "list_group" do %>
-          <%= ui "list_group_item", "Dashboard" %>
-          <%= ui "list_group_item", "Settings", active: true %>
-          <%= ui "list_group_item", "Billing" %>
-          <%= ui "list_group_item", "Help", variant: :muted %>
-        <% end %>
-      </div>
-
-      <div class="max-w-xs">
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With links</h3>
-        <%= ui "list_group" do %>
-          <%= ui "list_group_item", "Home",     href: "/up" %>
-          <%= ui "list_group_item", "Health",   href: "/up", active: true %>
-          <%= ui "list_group_item", "Back",     href: "/up" %>
-        <% end %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
     <%# BANNER %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Banner</h2>
+    <section id="banner" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Banner</h2>
 
       <%= ui "banner", "We just released ViewPrimitives 1.0! Check out the changelog." %>
       <%= ui "banner", "Your trial expires in 3 days. Upgrade to keep access.", variant: :warning %>
@@ -931,10 +284,117 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
+    <%# BOTTOM NAV %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="bottom-nav" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Bottom Nav</h2>
+      <p class="text-sm text-muted-foreground">Fixed bottom bar — preview below (not fixed in this context).</p>
+
+      <div class="overflow-hidden rounded-lg border border-border relative">
+        <%= ui :bottom_nav,
+              class: "static! relative! border-t-0 shadow-none",
+              items: [
+                { label: "Home",
+                  href: "#",
+                  active: true,
+                  icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>' },
+                { label: "Search",
+                  href: "#",
+                  icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>' },
+                { label: "Profile",
+                  href: "#",
+                  icon: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>' }
+              ] %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# BREADCRUMB %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="breadcrumb" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Breadcrumb</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Simple path</h3>
+        <%= ui :breadcrumb, items: [
+          { label: "Home",     href: "/" },
+          { label: "Products", href: "/products" },
+          { label: "Shoes" }
+        ] %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom separator</h3>
+        <%= ui :breadcrumb, separator: "›", items: [
+          { label: "Dashboard", href: "/" },
+          { label: "Settings",  href: "/settings" },
+          { label: "Profile" }
+        ] %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# BUTTON %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="button" class="space-y-6">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Button</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Variants</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "button", "Default" %>
+          <%= ui "button", "Destructive", variant: :destructive %>
+          <%= ui "button", "Outline",     variant: :outline %>
+          <%= ui "button", "Secondary",   variant: :secondary %>
+          <%= ui "button", "Ghost",       variant: :ghost %>
+          <%= ui "button", "Link",        variant: :link %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Sizes</h3>
+        <div class="flex flex-wrap items-center gap-3">
+          <%= ui "button", "Small",   size: :sm %>
+          <%= ui "button", "Default", size: :default %>
+          <%= ui "button", "Large",   size: :lg %>
+          <%= ui "button", size: :icon do %>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">As link (href:)</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "button", "Go to /up", href: "/up", variant: :outline %>
+          <%= ui "button", "Ghost link", href: "/up", variant: :ghost %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">label: keyword</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "button", label: "Keyword label" %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Disabled</h3>
+        <div class="flex flex-wrap gap-3">
+          <%= ui "button", "Disabled", disabled: true %>
+          <%= ui "button", "Disabled outline", variant: :outline, disabled: true %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
     <%# BUTTON GROUP %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Button Group</h2>
+    <section id="button-group" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Button Group</h2>
 
       <div>
         <h3 class="text-sm font-medium text-muted-foreground mb-3">Default buttons</h3>
@@ -957,733 +417,10 @@
 
 
     <%# ------------------------------------------------------------------ %>
-    <%# BREADCRUMB %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Breadcrumb</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Simple path</h3>
-        <%= ui :breadcrumb, items: [
-          { label: "Home",     href: "/" },
-          { label: "Products", href: "/products" },
-          { label: "Shoes" }
-        ] %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom separator</h3>
-        <%= ui :breadcrumb, separator: "›", items: [
-          { label: "Dashboard", href: "/" },
-          { label: "Settings",  href: "/settings" },
-          { label: "Profile" }
-        ] %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# PAGINATION %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Pagination</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Middle page</h3>
-        <%= ui :pagination,
-              current_page: 5,
-              total_pages: 12,
-              url: ->(page) { "/?page=#{page}" } %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">First page (prev disabled)</h3>
-        <%= ui :pagination,
-              current_page: 1,
-              total_pages: 8,
-              url: ->(page) { "/?page=#{page}" } %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Last page (next disabled)</h3>
-        <%= ui :pagination,
-              current_page: 8,
-              total_pages: 8,
-              url: ->(page) { "/?page=#{page}" } %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# STEPPER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Stepper</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal</h3>
-        <%= ui :stepper, steps: [
-          { label: "Account",  status: :complete },
-          { label: "Profile",  status: :current  },
-          { label: "Review",   status: :pending  },
-          { label: "Confirm",  status: :pending  }
-        ] %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical with descriptions</h3>
-        <%= ui :stepper, orientation: :vertical, steps: [
-          { label: "Order placed",  description: "We received your order.",     status: :complete },
-          { label: "Processing",    description: "Your order is being packed.",  status: :current  },
-          { label: "Shipped",       description: "On its way to you.",           status: :pending  },
-          { label: "Delivered",     description: "Enjoy!",                       status: :pending  }
-        ] %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TABS %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Tabs</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Array API</h3>
-        <%= ui :tabs, items: [
-          { title: "Overview",  content: "This is the overview panel content." },
-          { title: "Analytics", content: "Analytics data goes here." },
-          { title: "Settings",  content: "Change your settings here." }
-        ] %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Slot API</h3>
-        <%= ui :tabs do |t| %>
-          <% t.with_tab(title: "Tab One") do %>
-            <p class="text-sm text-muted-foreground">Content for the first tab.</p>
-          <% end %>
-          <% t.with_tab(title: "Tab Two") do %>
-            <p class="text-sm text-muted-foreground">Content for the second tab.</p>
-          <% end %>
-          <% t.with_tab(title: "Tab Three") do %>
-            <p class="text-sm text-muted-foreground">Content for the third tab.</p>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# NAVBAR %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Navbar</h2>
-      <p class="text-sm text-muted-foreground">The full navbar is rendered at the top of this page. Below is a contained preview.</p>
-
-      <div class="border rounded-lg overflow-hidden relative">
-        <%= ui :navbar,
-              brand: "MyApp",
-              brand_href: "#",
-              items: [
-                { label: "Home",     href: "#", active: true },
-                { label: "Products", href: "#" },
-                { label: "Pricing",  href: "#" },
-                { label: "About",    href: "#" }
-              ] do %>
-          <%= ui :button, "Sign in", variant: :outline, size: :sm %>
-          <%= ui :button, "Get started", size: :sm %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# BOTTOM NAV %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Bottom Nav</h2>
-      <p class="text-sm text-muted-foreground">Fixed bottom bar — preview below (not fixed in this context).</p>
-
-      <div class="relative border rounded-lg overflow-hidden">
-        <div class="static! bottom-auto! left-auto! w-full border-t bg-background">
-          <div class="mx-auto flex h-16 max-w-lg items-center justify-around">
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-4 py-2 text-xs font-medium text-primary">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <span>Home</span>
-            </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-4 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-              <span>Search</span>
-            </a>
-            <a href="#" class="flex flex-col items-center justify-center gap-1 px-4 py-2 text-xs font-medium text-muted-foreground hover:text-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span>Profile</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# FOOTER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Footer</h2>
-
-      <%= ui :footer,
-            copyright: "© #{Time.current.year} Acme Inc. All rights reserved.",
-            columns: [
-              { title: "Product", links: [
-                  { label: "Features", href: "#" },
-                  { label: "Pricing",  href: "#" },
-                  { label: "Changelog", href: "#" }
-                ]
-              },
-              { title: "Company", links: [
-                  { label: "About",   href: "#" },
-                  { label: "Blog",    href: "#" },
-                  { label: "Careers", href: "#" }
-                ]
-              },
-              { title: "Legal", links: [
-                  { label: "Privacy", href: "#" },
-                  { label: "Terms",   href: "#" }
-                ]
-              }
-            ] %>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# NAVIGATION MENU %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Navigation Menu</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Plain links</h3>
-        <%= ui :navigation_menu do |nav| %>
-          <% nav.with_item(label: "Home",    href: "#", active: true) %>
-          <% nav.with_item(label: "About",   href: "#") %>
-          <% nav.with_item(label: "Pricing", href: "#") %>
-        <% end %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With flyout dropdown</h3>
-        <%= ui :navigation_menu do |nav| %>
-          <% nav.with_item(label: "Home", href: "#", active: true) %>
-          <% nav.with_item(label: "Products") do %>
-            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
-              <span class="font-medium">Analytics</span>
-              <span class="text-xs text-muted-foreground">Track your metrics.</span>
-            </a>
-            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
-              <span class="font-medium">Reports</span>
-              <span class="text-xs text-muted-foreground">Download PDF reports.</span>
-            </a>
-            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
-              <span class="font-medium">Insights</span>
-              <span class="text-xs text-muted-foreground">AI-powered analysis.</span>
-            </a>
-          <% end %>
-          <% nav.with_item(label: "About", href: "#") %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# MEGA MENU %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Mega Menu</h2>
-
-      <div class="relative">
-        <%= ui :mega_menu, label: "Products", cols: 3 do |menu| %>
-          <% menu.with_column(
-              heading: "Analytics",
-              items: [
-                { title: "Dashboard",  href: "#", description: "Your metrics at a glance." },
-                { title: "Reports",    href: "#", description: "Scheduled PDF exports." },
-                { title: "Real-time",  href: "#", description: "Live event streaming." }
-              ]) %>
-          <% menu.with_column(
-              heading: "Marketing",
-              items: [
-                { title: "Campaigns",   href: "#", description: "Manage email campaigns." },
-                { title: "Automations", href: "#", description: "Set up trigger flows." }
-              ]) %>
-          <% menu.with_column(
-              heading: "Settings",
-              items: [
-                { title: "Team",    href: "#", description: "Invite and manage users." },
-                { title: "Billing", href: "#", description: "Plans and invoices." }
-              ]) %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# DIALOG %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Dialog</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">With title, description and footer</h3>
-        <%= ui :dialog, title: "Edit profile", description: "Make changes to your profile here. Click save when you're done." do |d| %>
-          <% d.with_trigger do %>
-            <%= ui :button, "Edit Profile", variant: :outline %>
-          <% end %>
-          <div class="space-y-3 py-2">
-            <%= ui :form_field, label: "Name", hint: "Your display name" do %>
-              <%= ui :input, placeholder: "Jane Doe" %>
-            <% end %>
-            <%= ui :form_field, label: "Username" do %>
-              <%= ui :input, placeholder: "@janedoe" %>
-            <% end %>
-          </div>
-          <% d.with_footer do %>
-            <%= ui :button, "Cancel", variant: :outline, data: { action: "click->dialog#close" } %>
-            <%= ui :button, "Save changes" %>
-          <% end %>
-        <% end %>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Simple message</h3>
-        <%= ui :dialog, title: "Heads up!", description: "You can add components to your app using the CLI." do |d| %>
-          <% d.with_trigger do %>
-            <%= ui :button, "Show Dialog" %>
-          <% end %>
-          <% d.with_footer do %>
-            <%= ui :button, "Got it", data: { action: "click->dialog#close" } %>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# ALERT DIALOG %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Alert Dialog</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Destructive confirmation</h3>
-        <%= ui :alert_dialog,
-              title: "Are you absolutely sure?",
-              description: "This action cannot be undone. This will permanently delete your account and remove your data from our servers." do |d| %>
-          <% d.with_trigger do %>
-            <%= ui :button, "Delete Account", variant: :destructive %>
-          <% end %>
-          <% d.with_footer do %>
-            <%= ui :button, "Cancel", variant: :outline, data: { action: "click->dialog#close" } %>
-            <%= ui :button, "Yes, delete account", variant: :destructive, data: { action: "click->dialog#close" } %>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SHEET %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Sheet</h2>
-
-      <div class="flex flex-wrap gap-3">
-        <% %i[right left top bottom].each do |side| %>
-          <%= ui :sheet, title: "Sheet (#{side})", description: "A slide-in panel from the #{side}.", side: side do |s| %>
-            <% s.with_trigger do %>
-              <%= ui :button, side.to_s.capitalize, variant: :outline %>
-            <% end %>
-            <p class="text-sm text-muted-foreground">Place any content here — forms, settings, details.</p>
-            <% s.with_footer do %>
-              <%= ui :button, "Close", variant: :outline, data: { action: "click->sheet#close" } %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# DRAWER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Drawer</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Bottom sheet (mobile drawer)</h3>
-        <%= ui :drawer, title: "Move to project", description: "Pick a project to move this task into." do |d| %>
-          <% d.with_trigger do %>
-            <%= ui :button, "Open Drawer" %>
-          <% end %>
-          <div class="space-y-2">
-            <% ["Design system", "Backend API", "Marketing site"].each do |project| %>
-              <button class="w-full rounded-md border px-4 py-3 text-left text-sm hover:bg-accent transition-colors">
-                <%= project %>
-              </button>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# POPOVER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Popover</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Below (default)</h3>
-          <%= ui :popover do |p| %>
-            <% p.with_trigger do %>
-              <%= ui :button, "Open Popover", variant: :outline %>
-            <% end %>
-            <div class="space-y-2">
-              <p class="font-medium text-sm">Dimensions</p>
-              <%= ui :form_field, label: "Width" do %>
-                <%= ui :input, placeholder: "100%" %>
-              <% end %>
-              <%= ui :form_field, label: "Height" do %>
-                <%= ui :input, placeholder: "auto" %>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Above</h3>
-          <%= ui :popover, side: :top do |p| %>
-            <% p.with_trigger do %>
-              <%= ui :button, "Popover above", variant: :outline %>
-            <% end %>
-            <p class="text-sm">This popover appears above the trigger.</p>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TOOLTIP %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Tooltip</h2>
-
-      <div class="flex flex-wrap gap-6 items-end">
-        <% [[:top, "Top"], [:bottom, "Bottom"], [:left, "Left"], [:right, "Right"]].each do |side, label| %>
-          <div>
-            <h3 class="text-sm font-medium text-muted-foreground mb-3"><%= label %></h3>
-            <%= ui :tooltip, text: "#{label} tooltip", side: side do %>
-              <%= ui :button, label, variant: :outline %>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# HOVER CARD %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Hover Card</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">User preview</h3>
-        <%= ui :hover_card do |h| %>
-          <% h.with_trigger do %>
-            <a href="#" class="text-sm font-medium underline underline-offset-4 hover:no-underline">@alexey</a>
-          <% end %>
-          <div class="flex items-start gap-3">
-            <%= ui :avatar, initials: "AP", class: "size-10" %>
-            <div class="space-y-1">
-              <p class="text-sm font-semibold">Alexey Poimtsev</p>
-              <p class="text-xs text-muted-foreground">@alexey · Joined May 2020</p>
-              <p class="text-xs text-muted-foreground mt-1">Building ViewPrimitives — shadcn/ui for Rails.</p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# DROPDOWN MENU %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Dropdown Menu</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Default (align start)</h3>
-          <%= ui :dropdown_menu do |d| %>
-            <% d.with_trigger do %>
-              <%= ui :button, "Options", variant: :outline %>
-            <% end %>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Edit</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Duplicate</button>
-            <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Archive</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Delete</button>
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Align end</h3>
-          <%= ui :dropdown_menu, align: :end do |d| %>
-            <% d.with_trigger do %>
-              <%= ui :button, "My Account", variant: :outline %>
-            <% end %>
-            <span class="<%= UI::DropdownMenuComponent::LABEL_CLS %>">my@email.com</span>
-            <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Profile</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Settings</button>
-            <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Log out</button>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# CONTEXT MENU %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Context Menu</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Right-click the area below</h3>
-        <%= ui :context_menu, class: "rounded-lg border-2 border-dashed border-muted p-12 text-center text-sm text-muted-foreground cursor-default" do |c| %>
-          <% c.with_menu do %>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Back</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Forward</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Reload</button>
-            <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Save as...</button>
-            <button class="<%= UI::DropdownMenuComponent::ITEM %>">View Page Source</button>
-          <% end %>
-          Right-click here to open context menu
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# MENUBAR %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Menubar</h2>
-
-      <%= ui :menubar do |m| %>
-        <% m.with_menu(label: "File") do %>
-          <span class="<%= UI::DropdownMenuComponent::LABEL_CLS %>">New</span>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">New Tab</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">New Window</button>
-          <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Open...</button>
-          <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Save</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Save As...</button>
-        <% end %>
-        <% m.with_menu(label: "Edit") do %>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Undo</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Redo</button>
-          <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Cut</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Copy</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Paste</button>
-        <% end %>
-        <% m.with_menu(label: "View") do %>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Always Show Bookmarks Bar</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Always Show Full URLs</button>
-          <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Reload</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Full Screen</button>
-        <% end %>
-        <% m.with_menu(label: "Help") do %>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Search Menu</button>
-          <hr class="<%= UI::DropdownMenuComponent::SEPARATOR %>">
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">Keyboard Shortcuts</button>
-          <button class="<%= UI::DropdownMenuComponent::ITEM %>">About</button>
-        <% end %>
-      <% end %>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# COMMAND %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Command</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Command palette — click or press ⌘K</h3>
-        <%= ui :command do |c| %>
-          <% c.with_trigger do %>
-            <button type="button" class="inline-flex h-9 w-64 items-center gap-2 rounded-md border bg-muted/50 px-3 text-sm text-muted-foreground shadow-none hover:bg-accent hover:text-accent-foreground">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-              <span class="flex-1 text-left">Search commands...</span>
-              <kbd class="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                <span class="text-xs">⌘</span>K
-              </kbd>
-            </button>
-          <% end %>
-          <div class="<%= UI::CommandComponent::GROUP_WRAPPER %>" data-command-group>
-            <p class="<%= UI::CommandComponent::GROUP %>">Suggestions</p>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="calendar">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-              <span>Calendar</span>
-            </button>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="search emoji">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
-              <span>Search Emoji</span>
-            </button>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="calculator">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
-              <span>Calculator</span>
-            </button>
-          </div>
-          <hr class="<%= UI::CommandComponent::SEPARATOR %>">
-          <div class="<%= UI::CommandComponent::GROUP_WRAPPER %>" data-command-group>
-            <p class="<%= UI::CommandComponent::GROUP %>">Settings</p>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="profile settings">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-              <span>Profile</span>
-              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘P</span>
-            </button>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="billing payment">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-              <span>Billing</span>
-              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘B</span>
-            </button>
-            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="settings configuration">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-              <span>Settings</span>
-              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘S</span>
-            </button>
-          </div>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# COMBOBOX %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Combobox</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div class="w-64">
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Framework</h3>
-          <%= ui :combobox, name: "framework", placeholder: "Select framework...", options: [
-            { value: "rails",   label: "Ruby on Rails" },
-            { value: "next",    label: "Next.js" },
-            { value: "nuxt",    label: "Nuxt" },
-            { value: "laravel", label: "Laravel" },
-            { value: "django",  label: "Django" },
-          ] %>
-        </div>
-
-        <div class="w-64">
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Country (pre-selected)</h3>
-          <%= ui :combobox, name: "country", value: "ca", placeholder: "Select country...", options: [
-            { value: "us", label: "United States" },
-            { value: "ca", label: "Canada" },
-            { value: "gb", label: "United Kingdom" },
-            { value: "de", label: "Germany" },
-            { value: "fr", label: "France" },
-            { value: "jp", label: "Japan" },
-          ] %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# COLLAPSIBLE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Collapsible</h2>
-
-      <div class="flex flex-wrap items-start gap-6">
-        <div class="w-80">
-          <%= ui :collapsible do |c| %>
-            <% c.with_trigger do %>
-              <span class="font-medium text-sm">What is ViewPrimitives?</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground transition-transform [[open]_&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-            <% end %>
-            <p class="text-sm text-muted-foreground mt-2">
-              A library of copy-paste UI components for Rails built with ViewComponent and Tailwind.
-            </p>
-          <% end %>
-        </div>
-
-        <div class="w-80">
-          <%= ui :collapsible do |c| %>
-            <% c.with_trigger do %>
-              <span class="font-medium text-sm">Do I need JavaScript?</span>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground transition-transform [[open]_&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
-            <% end %>
-            <p class="text-sm text-muted-foreground mt-2">
-              No — this Collapsible uses a native <code>&lt;details&gt;</code> element with no JS required.
-            </p>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SCROLL AREA %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Scroll Area</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical (200px)</h3>
-          <%= ui :scroll_area, class: "h-48 w-64 rounded-md border border-border p-4" do %>
-            <% 20.times do |i| %>
-              <p class="text-sm py-1">Item <%= i + 1 %></p>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal</h3>
-          <%= ui :scroll_area, orientation: :horizontal, class: "w-64 rounded-md border border-border p-4" do %>
-            <div class="flex gap-4" style="width: 600px">
-              <% 8.times do |i| %>
-                <div class="w-24 shrink-0 rounded-md bg-muted p-3 text-sm text-center">Card <%= i + 1 %></div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# CHAT BUBBLE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Chat Bubble</h2>
-
-      <div class="w-96 space-y-4">
-        <%= ui :chat_bubble, sent: false, timestamp: "9:41 AM" do %>
-          Hey! Have you tried ViewPrimitives yet?
-        <% end %>
-
-        <%= ui :chat_bubble, sent: true, timestamp: "9:42 AM" do %>
-          Yes, it's amazing! Copy-paste components for Rails.
-        <% end %>
-
-        <%= ui :chat_bubble, sent: false, timestamp: "9:43 AM" do %>
-          Totally agree. No npm, just Tailwind + ViewComponent.
-        <% end %>
-
-        <%= ui :chat_bubble, sent: true, timestamp: "9:43 AM" do %>
-          And Stimulus for the interactive bits!
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
     <%# CALENDAR %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Calendar</h2>
+    <section id="calendar" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Calendar</h2>
 
       <div class="flex flex-wrap gap-6">
         <div>
@@ -1704,82 +441,48 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# DATE PICKER %>
+    <%# CARD %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Date Picker</h2>
+    <section id="card" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Card</h2>
 
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Default</h3>
-          <%= ui :date_picker, name: "start_date" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Pre-filled</h3>
-          <%= ui :date_picker, value: Date.today, name: "end_date" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom placeholder</h3>
-          <%= ui :date_picker, placeholder: "Choose deadline…", name: "deadline" %>
-        </div>
+      <div class="max-w-sm">
+        <%= ui "card" do %>
+          <%= ui "card_header" do %>
+            <%= ui "card_title", "Create project" %>
+            <%= ui "card_description", "Deploy your new project in one click." %>
+          <% end %>
+          <%= ui "card_content" do %>
+            <p class="text-sm text-muted-foreground">Your project will be deployed using the default configuration.</p>
+          <% end %>
+          <%= ui "card_footer" do %>
+            <%= ui "button", "Deploy", class: "w-full" %>
+          <% end %>
+        <% end %>
       </div>
-    </section>
 
-    <%# ------------------------------------------------------------------ %>
-    <%# TIMEPICKER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Timepicker</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">24-hour</h3>
-          <%= ui :timepicker, name: "start_time" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">12-hour (AM/PM)</h3>
-          <%= ui :timepicker, format: :h12, name: "meeting_time" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">30-minute steps</h3>
-          <%= ui :timepicker, step: 30, value: "09:00", name: "slot" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# INPUT OTP %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Input OTP</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">6 digits (default)</h3>
-          <%= ui :input_otp, name: "otp" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">4 digits</h3>
-          <%= ui :input_otp, length: 4, name: "pin" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">With separator</h3>
-          <%= ui :input_otp, length: 6, separator: 3, name: "code" %>
-        </div>
+      <div class="max-w-sm">
+        <%= ui "card" do %>
+          <%= ui "card_header" do %>
+            <%= ui "card_title", label: "Notifications" %>
+            <%= ui "card_description", "You have 3 unread messages." %>
+          <% end %>
+          <%= ui "card_content" do %>
+            <div class="space-y-2 text-sm">
+              <p>New comment on your post</p>
+              <p>Your subscription renews tomorrow</p>
+              <p>Welcome to ViewPrimitives!</p>
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
     <%# CAROUSEL %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Carousel</h2>
+    <section id="carousel" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Carousel</h2>
 
       <div class="flex flex-wrap gap-6">
         <div class="w-80">
@@ -1811,210 +514,10 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# GALLERY %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Gallery</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">3-column grid with lightbox</h3>
-        <%= ui :gallery, cols: 3 do |g| %>
-          <% [
-            { src: "https://picsum.photos/seed/a/400/300", alt: "Mountain lake" },
-            { src: "https://picsum.photos/seed/b/400/300", alt: "Forest path" },
-            { src: "https://picsum.photos/seed/c/400/300", alt: "City skyline" },
-            { src: "https://picsum.photos/seed/d/400/300", alt: "Desert dunes" },
-            { src: "https://picsum.photos/seed/e/400/300", alt: "Ocean waves" },
-            { src: "https://picsum.photos/seed/f/400/300", alt: "Snowy peaks" },
-          ].each do |img| %>
-            <% g.with_image(src: img[:src], alt: img[:alt]) %>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SPEED DIAL %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Speed Dial</h2>
-
-      <h3 class="text-sm font-medium text-muted-foreground">Bottom right</h3>
-      <div class="relative h-48 rounded-lg border border-border bg-muted/20">
-        <%= ui :speed_dial, style: "position: absolute; bottom: 24px; right: 24px;" do |d| %>
-          <% d.with_action(label: "New document", href: "#") %>
-          <% d.with_action(label: "Upload file",  href: "#") %>
-          <% d.with_action(label: "Share link",   href: "#") %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# RESIZABLE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Resizable</h2>
-
-      <div class="space-y-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal (drag the divider)</h3>
-          <%= ui :resizable, class: "h-40" do |r| %>
-            <% r.with_panel(default: 35) do %>
-              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
-                Left panel
-              </div>
-            <% end %>
-            <% r.with_panel do %>
-              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
-                Right panel
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical</h3>
-          <%= ui :resizable, direction: :vertical, class: "h-56" do |r| %>
-            <% r.with_panel(default: 40) do %>
-              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
-                Top panel
-              </div>
-            <% end %>
-            <% r.with_panel do %>
-              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
-                Bottom panel
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# SIDEBAR %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Sidebar</h2>
-
-      <div class="relative h-80 overflow-hidden rounded-lg border border-border bg-background">
-        <%= ui :sidebar, brand: "Acme",
-          style: "position: relative; inset: auto; z-index: 1;" do |s| %>
-          <% s.with_group(label: "Main") do |g| %>
-            <% g.with_item(label: "Dashboard", href: "#", icon: :dashboard, active: true) %>
-            <% g.with_item(label: "Projects",  href: "#", icon: :folder) %>
-            <% g.with_item(label: "Tasks",     href: "#", icon: :tasks) %>
-          <% end %>
-          <% s.with_group(label: "Account") do |g| %>
-            <% g.with_item(label: "Settings", href: "#", icon: :settings) %>
-            <% g.with_item(label: "Billing",  href: "#", icon: :credit_card) %>
-          <% end %>
-        <% end %>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# DATA TABLE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Data Table</h2>
-
-      <%= ui :data_table,
-        columns: [
-          { key: :name,       label: "Name",       sortable: true },
-          { key: :role,       label: "Role",        sortable: true },
-          { key: :status,     label: "Status",      sortable: true },
-          { key: :joined,     label: "Joined",      sortable: true },
-        ],
-        rows: [
-          { name: "Alice Chen",    role: "Engineer",   status: "Active",    joined: "2022-03-14" },
-          { name: "Bob Smith",     role: "Designer",   status: "Active",    joined: "2021-11-02" },
-          { name: "Carol White",   role: "PM",         status: "On leave",  joined: "2020-06-28" },
-          { name: "David Park",    role: "Engineer",   status: "Active",    joined: "2023-01-09" },
-          { name: "Eva Martinez",  role: "QA",         status: "Inactive",  joined: "2019-08-17" },
-          { name: "Frank Liu",     role: "Engineer",   status: "Active",    joined: "2022-09-30" },
-          { name: "Grace Kim",     role: "Designer",   status: "Active",    joined: "2023-04-05" },
-          { name: "Hank Torres",   role: "DevOps",     status: "Active",    joined: "2021-07-22" },
-          { name: "Iris Johnson",  role: "PM",         status: "Active",    joined: "2020-12-11" },
-          { name: "Jack Brown",    role: "Engineer",   status: "On leave",  joined: "2022-05-19" },
-          { name: "Karen Lee",     role: "QA",         status: "Active",    joined: "2023-08-03" },
-          { name: "Leo Adams",     role: "Engineer",   status: "Inactive",  joined: "2018-03-27" },
-        ],
-        per_page: 5,
-        caption: "Team members" %>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TOASTER %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Toaster</h2>
-
-      <div class="space-y-3">
-        <p class="text-sm text-muted-foreground">Click a button to trigger a toast. The toaster container is fixed bottom-right on this page.</p>
-        <div class="flex flex-wrap gap-2">
-          <button type="button"
-            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
-            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'Changes saved successfully.' } }))">
-            Default
-          </button>
-          <button type="button"
-            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
-            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'Profile updated.', variant: 'success' } }))">
-            Success
-          </button>
-          <button type="button"
-            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
-            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { title: 'Warning', message: 'Session expires in 5 minutes.', variant: 'warning' } }))">
-            Warning
-          </button>
-          <button type="button"
-            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
-            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { title: 'Error', message: 'Failed to save changes.', variant: 'destructive' } }))">
-            Destructive
-          </button>
-          <button type="button"
-            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
-            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'New version available.', variant: 'info', duration: 0 } }))">
-            Info (no auto-dismiss)
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# TIMELINE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Timeline</h2>
-
-      <div class="flex flex-wrap gap-12">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-4">Default</h3>
-          <%= ui :timeline do |t| %>
-            <% t.with_item(date: "January 2025", title: "Project kicked off") %>
-            <% t.with_item(date: "February 2025", title: "Design complete", description: "Wireframes and visual specs approved by stakeholders") %>
-            <% t.with_item(date: "March 2025", title: "Development started") %>
-            <% t.with_item(date: "April 2025", title: "Beta released", description: "Shipped to internal testers") %>
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-4">With variants</h3>
-          <%= ui :timeline do |t| %>
-            <% t.with_item(date: "2025-01-10", title: "Deployment triggered", variant: :default) %>
-            <% t.with_item(date: "2025-01-10", title: "Health checks passed", description: "All 12 instances healthy", variant: :success) %>
-            <% t.with_item(date: "2025-01-10", title: "High memory usage", description: "p99 spiked to 87%", variant: :warning) %>
-            <% t.with_item(date: "2025-01-11", title: "Rollback initiated", variant: :destructive) %>
-            <% t.with_item(date: "2025-01-11", title: "Resolved — patch deployed", variant: :success) %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
     <%# CHART %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Chart</h2>
+    <section id="chart" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Chart</h2>
       <p class="text-sm text-muted-foreground">Chart.js adapter — requires <code class="font-mono text-xs bg-muted px-1 py-0.5 rounded">chart.js</code> pinned in importmap.</p>
 
       <div class="flex flex-wrap gap-8">
@@ -2058,37 +561,280 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# DEVICE MOCKUP %>
+    <%# CHAT BUBBLE %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Device Mockup</h2>
+    <section id="chat-bubble" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Chat Bubble</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        <div class="flex justify-center">
-          <div>
-            <h3 class="text-sm font-medium text-muted-foreground mb-3 text-center">Phone</h3>
-            <%= ui :device_mockup, variant: :phone do %>
-              <div class="flex h-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
-                <p class="text-sm text-muted-foreground">App content</p>
-              </div>
+      <div class="w-96 space-y-4">
+        <%= ui :chat_bubble, sent: false, timestamp: "9:41 AM" do %>
+          Hey! Have you tried ViewPrimitives yet?
+        <% end %>
+
+        <%= ui :chat_bubble, sent: true, timestamp: "9:42 AM" do %>
+          Yes, it's amazing! Copy-paste components for Rails.
+        <% end %>
+
+        <%= ui :chat_bubble, sent: false, timestamp: "9:43 AM" do %>
+          Totally agree. No npm, just Tailwind + ViewComponent.
+        <% end %>
+
+        <%= ui :chat_bubble, sent: true, timestamp: "9:43 AM" do %>
+          And Stimulus for the interactive bits!
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# CHECKBOX %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="checkbox" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Checkbox</h2>
+
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With label</h3>
+          <%= ui "checkbox", label: "Accept terms and conditions", name: "terms", id: "terms" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Pre-checked</h3>
+          <%= ui "checkbox", label: "Subscribe to newsletter", name: "newsletter", checked: true %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Without label (standalone)</h3>
+          <%= ui "checkbox", name: "standalone" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# COLLAPSIBLE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="collapsible" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Collapsible</h2>
+
+      <div class="flex flex-wrap items-start gap-6">
+        <div class="w-80">
+          <%= ui :collapsible do |c| %>
+            <% c.with_trigger do %>
+              <span class="font-medium text-sm">What is ViewPrimitives?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground transition-transform [[open]_&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
             <% end %>
+            <p class="text-sm text-muted-foreground mt-2">
+              A library of copy-paste UI components for Rails built with ViewComponent and Tailwind.
+            </p>
+          <% end %>
+        </div>
+
+        <div class="w-80">
+          <%= ui :collapsible do |c| %>
+            <% c.with_trigger do %>
+              <span class="font-medium text-sm">Do I need JavaScript?</span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="size-4 text-muted-foreground transition-transform [[open]_&]:rotate-180"><path d="m6 9 6 6 6-6"/></svg>
+            <% end %>
+            <p class="text-sm text-muted-foreground mt-2">
+              No — this Collapsible uses a native <code>&lt;details&gt;</code> element with no JS required.
+            </p>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# COMBOBOX %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="combobox" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Combobox</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div class="w-64">
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Framework</h3>
+          <%= ui :combobox, name: "framework", placeholder: "Select framework...", options: [
+            { value: "rails",   label: "Ruby on Rails" },
+            { value: "next",    label: "Next.js" },
+            { value: "nuxt",    label: "Nuxt" },
+            { value: "laravel", label: "Laravel" },
+            { value: "django",  label: "Django" },
+          ] %>
+        </div>
+
+        <div class="w-64">
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Country (pre-selected)</h3>
+          <%= ui :combobox, name: "country", value: "ca", placeholder: "Select country...", options: [
+            { value: "us", label: "United States" },
+            { value: "ca", label: "Canada" },
+            { value: "gb", label: "United Kingdom" },
+            { value: "de", label: "Germany" },
+            { value: "fr", label: "France" },
+            { value: "jp", label: "Japan" },
+          ] %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# COMMAND %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="command" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Command</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Command palette — click or press ⌘K</h3>
+        <%= ui :command do |c| %>
+          <% c.with_trigger do %>
+            <button type="button" class="inline-flex h-9 w-64 items-center gap-2 rounded-md border border-input bg-muted/50 px-3 text-sm text-muted-foreground shadow-none hover:bg-accent hover:text-accent-foreground">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+              <span class="flex-1 text-left">Search commands...</span>
+              <kbd class="pointer-events-none hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+                <span class="text-xs">⌘</span>K
+              </kbd>
+            </button>
+          <% end %>
+          <div class="<%= UI::CommandComponent::GROUP_WRAPPER %>" data-command-group>
+            <p class="<%= UI::CommandComponent::GROUP %>">Suggestions</p>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="calendar">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              <span>Calendar</span>
+            </button>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="search emoji">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+              <span>Search Emoji</span>
+            </button>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="calculator">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M8 14h.01M12 14h.01M8 18h.01M12 18h.01"/></svg>
+              <span>Calculator</span>
+            </button>
           </div>
+          <div role="separator" class="<%= UI::CommandComponent::SEPARATOR %>"></div>
+          <div class="<%= UI::CommandComponent::GROUP_WRAPPER %>" data-command-group>
+            <p class="<%= UI::CommandComponent::GROUP %>">Settings</p>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="profile settings">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              <span>Profile</span>
+              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘P</span>
+            </button>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="billing payment">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              <span>Billing</span>
+              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘B</span>
+            </button>
+            <button class="<%= UI::CommandComponent::ITEM %>" data-command-value="settings configuration">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+              <span>Settings</span>
+              <span class="<%= UI::CommandComponent::SHORTCUT %>">⌘S</span>
+            </button>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# CONTEXT MENU %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="context-menu" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Context Menu</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Right-click the area below</h3>
+        <%= ui :context_menu, class: "rounded-lg border-2 border-dashed border-muted p-12 text-center text-sm text-muted-foreground cursor-default" do |c| %>
+          <% c.with_menu do %>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Back</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Forward</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Reload</button>
+            <div role="separator" class="<%= UI::DropdownMenuComponent::SEPARATOR %>"></div>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Save as...</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">View Page Source</button>
+          <% end %>
+          Right-click here to open context menu
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# DATA TABLE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="data-table" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Data Table</h2>
+
+      <%= ui :data_table,
+        columns: [
+          { key: :name,       label: "Name",       sortable: true },
+          { key: :role,       label: "Role",        sortable: true },
+          { key: :status,     label: "Status",      sortable: true },
+          { key: :joined,     label: "Joined",      sortable: true },
+        ],
+        rows: [
+          { name: "Alice Chen",    role: "Engineer",   status: "Active",    joined: "2022-03-14" },
+          { name: "Bob Smith",     role: "Designer",   status: "Active",    joined: "2021-11-02" },
+          { name: "Carol White",   role: "PM",         status: "On leave",  joined: "2020-06-28" },
+          { name: "David Park",    role: "Engineer",   status: "Active",    joined: "2023-01-09" },
+          { name: "Eva Martinez",  role: "QA",         status: "Inactive",  joined: "2019-08-17" },
+          { name: "Frank Liu",     role: "Engineer",   status: "Active",    joined: "2022-09-30" },
+          { name: "Grace Kim",     role: "Designer",   status: "Active",    joined: "2023-04-05" },
+          { name: "Hank Torres",   role: "DevOps",     status: "Active",    joined: "2021-07-22" },
+          { name: "Iris Johnson",  role: "PM",         status: "Active",    joined: "2020-12-11" },
+          { name: "Jack Brown",    role: "Engineer",   status: "On leave",  joined: "2022-05-19" },
+          { name: "Karen Lee",     role: "QA",         status: "Active",    joined: "2023-08-03" },
+          { name: "Leo Adams",     role: "Engineer",   status: "Inactive",  joined: "2018-03-27" },
+        ],
+        per_page: 5,
+        caption: "Team members" %>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# DATE PICKER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="date-picker" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Date Picker</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Default</h3>
+          <%= ui :date_picker, name: "start_date" %>
         </div>
 
         <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Browser</h3>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Pre-filled</h3>
+          <%= ui :date_picker, value: Date.today, name: "end_date" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom placeholder</h3>
+          <%= ui :date_picker, placeholder: "Choose deadline…", name: "deadline" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# DEVICE MOCKUP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="device-mockup" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Device Mockup</h2>
+
+      <div class="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+        <div class="flex flex-col items-center">
+          <h3 class="mb-3 text-sm font-medium text-muted-foreground">iPhone</h3>
+          <%= ui :device_mockup, variant: :phone do %>
+            <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+              <p class="text-sm text-muted-foreground">App content</p>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="flex flex-col items-center">
+          <h3 class="mb-3 text-sm font-medium text-muted-foreground">Browser</h3>
           <%= ui :device_mockup, variant: :browser, url: "https://example.com" do %>
-            <div class="flex h-48 items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+            <div class="absolute inset-0 flex min-h-48 items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
               <p class="text-sm text-muted-foreground">Browser content</p>
             </div>
           <% end %>
         </div>
       </div>
 
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Tablet</h3>
+      <div class="flex flex-col items-center">
+        <h3 class="mb-3 text-sm font-medium text-muted-foreground">iPad</h3>
         <%= ui :device_mockup, variant: :tablet do %>
-          <div class="flex h-full items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+          <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
             <p class="text-sm text-muted-foreground">Tablet view</p>
           </div>
         <% end %>
@@ -2096,261 +842,111 @@
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# QR CODE %>
+    <%# DIALOG %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">QR Code</h2>
-
-      <div class="flex flex-wrap gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">From image URL</h3>
-          <%= ui :qr_code, src: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com/alec-c4/view_primitives", alt: "GitHub repo QR code", size: 160 %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom size</h3>
-          <%= ui :qr_code, src: "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://example.com", alt: "Example.com QR code", size: 120 %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# PICTURE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Picture</h2>
+    <section id="dialog" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Dialog</h2>
 
       <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Art direction with sources</h3>
-        <%= ui :picture,
-              src: "https://placehold.co/800x400/e2e8f0/64748b?text=Fallback+800x400",
-              alt: "Responsive demo image",
-              width: 800, height: 400 do |p| %>
-          <% p.with_source(
-              srcset: "https://placehold.co/400x300/e2e8f0/64748b?text=Mobile+400x300",
-              media:  "(max-width: 640px)",
-              type:   "image/jpeg") %>
-          <% p.with_source(
-              srcset: "https://placehold.co/800x400/e2e8f0/64748b?text=Desktop+800x400",
-              media:  "(min-width: 641px)",
-              type:   "image/jpeg") %>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With title, description and footer</h3>
+        <%= ui :dialog, title: "Edit profile", description: "Make changes to your profile here. Click save when you're done." do |d| %>
+          <% d.with_trigger do %>
+            <%= ui :button, "Edit Profile", variant: :outline %>
+          <% end %>
+          <div class="space-y-3 py-2">
+            <%= ui :form_field, label: "Name", hint: "Your display name" do %>
+              <%= ui :input, placeholder: "Jane Doe" %>
+            <% end %>
+            <%= ui :form_field, label: "Username" do %>
+              <%= ui :input, placeholder: "@janedoe" %>
+            <% end %>
+          </div>
+          <% d.with_footer do %>
+            <%= ui :button, "Cancel", variant: :outline, data: { action: "click->dialog#close" } %>
+            <%= ui :button, "Save changes" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Simple message</h3>
+        <%= ui :dialog, title: "Heads up!", description: "You can add components to your app using the CLI." do |d| %>
+          <% d.with_trigger do %>
+            <%= ui :button, "Show Dialog" %>
+          <% end %>
+          <% d.with_footer do %>
+            <%= ui :button, "Got it", data: { action: "click->dialog#close" } %>
+          <% end %>
         <% end %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
-    <%# IMAGE %>
+    <%# DRAWER %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Image</h2>
+    <section id="drawer" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Drawer</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Basic</h3>
-          <%= ui :image,
-                src: "https://placehold.co/600x300/e2e8f0/64748b?text=Basic+Image",
-                alt: "Basic image example",
-                width: 600, height: 300,
-                class: "rounded-md" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">With srcset</h3>
-          <%= ui :image,
-                src: "https://placehold.co/600x300/e2e8f0/64748b?text=Image+600w",
-                alt: "Responsive image with srcset",
-                srcset: "https://placehold.co/300x150/e2e8f0/64748b?text=300w 300w, https://placehold.co/600x300/e2e8f0/64748b?text=600w 600w",
-                sizes: "(max-width: 640px) 300px, 600px",
-                width: 600, height: 300,
-                class: "rounded-md" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# FIGURE %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Figure</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">With caption</h3>
-          <%= ui :figure, caption: "Figure 1 — A placeholder image used for illustration." do %>
-            <%= ui :image,
-                  src: "https://placehold.co/600x300/e2e8f0/64748b?text=Figure+content",
-                  alt: "Figure with caption",
-                  width: 600, height: 300,
-                  class: "rounded-md w-full" %>
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Bottom sheet (mobile drawer)</h3>
+        <%= ui :drawer, title: "Move to project", description: "Pick a project to move this task into." do |d| %>
+          <% d.with_trigger do %>
+            <%= ui :button, "Open Drawer" %>
           <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Without caption</h3>
-          <%= ui :figure do %>
-            <%= ui :image,
-                  src: "https://placehold.co/600x300/e2e8f0/64748b?text=No+caption",
-                  alt: "Figure without caption",
-                  width: 600, height: 300,
-                  class: "rounded-md w-full" %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# VIDEO %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Video</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">With controls</h3>
-          <%= ui :video,
-                poster: "https://placehold.co/640x360/e2e8f0/64748b?text=Video+poster",
-                controls: true,
-                class: "rounded-md w-full" do |v| %>
-            <% v.with_source(src: "https://www.w3schools.com/html/mov_bbb.mp4", type: "video/mp4") %>
-            Your browser does not support the video element.
-          <% end %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">In Aspect Ratio wrapper</h3>
-          <%= ui :aspect_ratio, ratio: "16/9", class: "rounded-md overflow-hidden bg-muted" do %>
-            <%= ui :video,
-                  controls: true,
-                  class: "h-full w-full object-cover" do |v| %>
-              <% v.with_source(src: "https://www.w3schools.com/html/mov_bbb.mp4", type: "video/mp4") %>
+          <div class="space-y-2">
+            <% ["Design system", "Backend API", "Marketing site"].each do |project| %>
+              <button class="w-full rounded-md border px-4 py-3 text-left text-sm hover:bg-accent transition-colors">
+                <%= project %>
+              </button>
             <% end %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# DROPDOWN MENU %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="dropdown-menu" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Dropdown Menu</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Default (align start)</h3>
+          <%= ui :dropdown_menu do |d| %>
+            <% d.with_trigger do %>
+              <%= ui :button, "Options", variant: :outline %>
+            <% end %>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Edit</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Duplicate</button>
+            <div role="separator" class="<%= UI::DropdownMenuComponent::SEPARATOR %>"></div>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Archive</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Delete</button>
           <% end %>
         </div>
-      </div>
-    </section>
 
-    <%# ------------------------------------------------------------------ %>
-    <%# AUDIO %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Audio</h2>
-
-      <div class="space-y-4">
         <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">With controls</h3>
-          <%= ui :audio, controls: true, class: "w-full" do |a| %>
-            <% a.with_source(src: "https://www.w3schools.com/html/horse.ogg", type: "audio/ogg") %>
-            <% a.with_source(src: "https://www.w3schools.com/html/horse.mp3", type: "audio/mpeg") %>
-            Your browser does not support the audio element.
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Align end</h3>
+          <%= ui :dropdown_menu, align: :end do |d| %>
+            <% d.with_trigger do %>
+              <%= ui :button, "My Account", variant: :outline %>
+            <% end %>
+            <span class="<%= UI::DropdownMenuComponent::LABEL_CLS %>">my@email.com</span>
+            <div role="separator" class="<%= UI::DropdownMenuComponent::SEPARATOR %>"></div>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Profile</button>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Settings</button>
+            <div role="separator" class="<%= UI::DropdownMenuComponent::SEPARATOR %>"></div>
+            <button class="<%= UI::DropdownMenuComponent::ITEM %>">Log out</button>
           <% end %>
         </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Looping</h3>
-          <%= ui :audio, controls: true, loop: true, class: "w-full" do |a| %>
-            <% a.with_source(src: "https://www.w3schools.com/html/horse.mp3", type: "audio/mpeg") %>
-          <% end %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# IFRAME %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Iframe</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Fixed height</h3>
-          <%= ui :iframe,
-                src: "https://www.openstreetmap.org/export/embed.html?bbox=-0.2,51.4,0.0,51.6&layer=mapnik",
-                title: "OpenStreetMap — London area",
-                height: 300,
-                class: "rounded-md" %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">16:9 aspect ratio</h3>
-          <%= ui :iframe,
-                src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                title: "YouTube video embed example",
-                aspect: "16/9",
-                class: "rounded-md" %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# WYSIWYG %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">WYSIWYG</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Trix (default)</h3>
-        <%= ui :wysiwyg, name: "body_trix",
-              placeholder: "Write something with Trix..." %>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Quill</h3>
-          <%= ui :wysiwyg, name: "body_quill", adapter: :quill,
-                placeholder: "Write something with Quill...",
-                height: 180 %>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-muted-foreground mb-3">Quill without toolbar</h3>
-          <%= ui :wysiwyg, name: "notes", adapter: :quill,
-                placeholder: "Plain text area, no toolbar...",
-                toolbar: false,
-                height: 180 %>
-        </div>
-      </div>
-    </section>
-
-    <%# ------------------------------------------------------------------ %>
-    <%# MAP AREA %>
-    <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Map / Area</h2>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Clickable regions on an image</h3>
-        <%= ui :map_area,
-              src: "https://placehold.co/800x400/e2e8f0/64748b?text=Image+Map+(click+the+regions)",
-              alt: "Image map demo",
-              width: 800, height: 400,
-              areas: [
-                { shape: :rect,   coords: "0,0,266,400",   href: "#left",   alt: "Left region",   title: "Left region" },
-                { shape: :rect,   coords: "267,0,533,400",  href: "#center", alt: "Center region", title: "Center region" },
-                { shape: :rect,   coords: "534,0,800,400",  href: "#right",  alt: "Right region",  title: "Right region" }
-              ],
-              class: "rounded-md overflow-hidden" %>
-        <p class="mt-2 text-xs text-muted-foreground">Three equal clickable columns — inspect the element to see the <code>&lt;map&gt;</code> structure.</p>
-      </div>
-
-      <div>
-        <h3 class="text-sm font-medium text-muted-foreground mb-3">Circle and polygon areas</h3>
-        <%= ui :map_area,
-              src: "https://placehold.co/600x300/e2e8f0/64748b?text=Circle+%26+Poly+regions",
-              alt: "Circle and polygon image map demo",
-              width: 600, height: 300,
-              areas: [
-                { shape: :circle, coords: "150,150,100",               href: "#circle", alt: "Circle area",   title: "Circle" },
-                { shape: :poly,   coords: "400,50,550,50,575,250,375,250", href: "#poly",   alt: "Polygon area", title: "Polygon" }
-              ],
-              class: "rounded-md overflow-hidden" %>
       </div>
     </section>
 
     <%# ------------------------------------------------------------------ %>
     <%# EMBED %>
     <%# ------------------------------------------------------------------ %>
-    <section class="space-y-4">
-      <h2 class="text-xl font-semibold border-b pb-2">Embed</h2>
+    <section id="embed" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Embed</h2>
 
       <%# Auto-detect from URL — no type: needed %>
       <div>
@@ -2415,5 +1011,1454 @@
       </div>
     </section>
 
+    <%# ------------------------------------------------------------------ %>
+    <%# FIGURE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="figure" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Figure</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">With caption</h3>
+          <%= ui :figure, caption: "Figure 1 — A placeholder image used for illustration." do %>
+            <%= ui :image,
+                  src: "https://placehold.co/600x300/e2e8f0/64748b?text=Figure+content",
+                  alt: "Figure with caption",
+                  width: 600, height: 300,
+                  class: "rounded-md w-full" %>
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Without caption</h3>
+          <%= ui :figure do %>
+            <%= ui :image,
+                  src: "https://placehold.co/600x300/e2e8f0/64748b?text=No+caption",
+                  alt: "Figure without caption",
+                  width: 600, height: 300,
+                  class: "rounded-md w-full" %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# FILE INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="file-input" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">File Input</h2>
+      <div class="flex flex-wrap gap-6 max-w-lg">
+        <div class="w-full">
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Single file</h3>
+          <%= ui :file_input, name: "avatar" %>
+        </div>
+        <div class="w-full">
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Multiple images</h3>
+          <%= ui :file_input, name: "photos[]", multiple: true, accept: "image/*" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# FLOATING LABEL %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="floating-label" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Floating Label</h2>
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Text</h3>
+          <%= ui :floating_label, label: "Full name", id: "fl_name", name: "name" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Email</h3>
+          <%= ui :floating_label, label: "Email address", type: "email", id: "fl_email", name: "email" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Password</h3>
+          <%= ui :floating_label, label: "Password", type: "password", id: "fl_pass", name: "password" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ================================================================== %>
+    <%# PHASE 2 — DISPLAY %>
+    <%# ================================================================== %>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# FOOTER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="footer" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Footer</h2>
+
+      <%= ui :footer,
+            copyright: "© #{Time.current.year} Acme Inc. All rights reserved.",
+            columns: [
+              { title: "Product", links: [
+                  { label: "Features", href: "#" },
+                  { label: "Pricing",  href: "#" },
+                  { label: "Changelog", href: "#" }
+                ]
+              },
+              { title: "Company", links: [
+                  { label: "About",   href: "#" },
+                  { label: "Blog",    href: "#" },
+                  { label: "Careers", href: "#" }
+                ]
+              },
+              { title: "Legal", links: [
+                  { label: "Privacy", href: "#" },
+                  { label: "Terms",   href: "#" }
+                ]
+              }
+            ] %>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# FORM FIELD %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="form-field" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Form Field</h2>
+
+      <div class="max-w-sm space-y-4">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Label + hint</h3>
+          <%= ui "form_field", label: "Username", hint: "Letters and numbers only." do %>
+            <%= ui "input", name: "username", placeholder: "alice" %>
+          <% end %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Required</h3>
+          <%= ui "form_field", label: "Email", required: true do %>
+            <%= ui "input", type: "email", name: "email", placeholder: "you@example.com" %>
+          <% end %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With validation error</h3>
+          <%= ui "form_field", label: "Password", error: "is too short (minimum 8 characters)" do %>
+            <%= ui "input", type: "password", name: "password", class: "border-destructive focus-visible:ring-destructive" %>
+          <% end %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Complete form example</h3>
+          <%= form_with url: "/up", method: :post, class: "space-y-4" do %>
+            <%= ui "form_field", label: "Full name", required: true do %>
+              <%= ui "input", name: "name", placeholder: "Alice Smith" %>
+            <% end %>
+            <%= ui "form_field", label: "Bio", hint: "Max 200 characters." do %>
+              <%= ui "textarea", name: "bio", placeholder: "Tell us about yourself..." %>
+            <% end %>
+            <%= ui "form_field", label: "Country" do %>
+              <%= ui "select", options: [["us", "United States"], ["gb", "United Kingdom"]], name: "country" %>
+            <% end %>
+            <%= ui "checkbox", label: "I agree to the terms", name: "terms" %>
+            <div class="flex gap-2">
+              <%= ui "button", "Save", type: "submit" %>
+              <%= ui "button", "Cancel", variant: :outline %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# GALLERY %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="gallery" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Gallery</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">3-column grid with lightbox</h3>
+        <%= ui :gallery, cols: 3 do |g| %>
+          <% [
+            { src: "https://picsum.photos/seed/a/400/300", alt: "Mountain lake" },
+            { src: "https://picsum.photos/seed/b/400/300", alt: "Forest path" },
+            { src: "https://picsum.photos/seed/c/400/300", alt: "City skyline" },
+            { src: "https://picsum.photos/seed/d/400/300", alt: "Desert dunes" },
+            { src: "https://picsum.photos/seed/e/400/300", alt: "Ocean waves" },
+            { src: "https://picsum.photos/seed/f/400/300", alt: "Snowy peaks" },
+          ].each do |img| %>
+            <% g.with_image(src: img[:src], alt: img[:alt]) %>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# HOVER CARD %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="hover-card" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Hover Card</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">User preview</h3>
+        <%= ui :hover_card do |h| %>
+          <% h.with_trigger do %>
+            <a href="#" class="text-sm font-medium underline underline-offset-4 hover:no-underline">@alexey</a>
+          <% end %>
+          <div class="flex items-start gap-3">
+            <%= ui :avatar, initials: "AP", class: "size-10" %>
+            <div class="space-y-1">
+              <p class="text-sm font-semibold">Alexey Poimtsev</p>
+              <p class="text-xs text-muted-foreground">@alexey · Joined May 2020</p>
+              <p class="text-xs text-muted-foreground mt-1">Building ViewPrimitives — shadcn/ui for Rails.</p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# IFRAME %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="iframe" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Iframe</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Fixed height</h3>
+          <%= ui :iframe,
+                src: "https://www.openstreetmap.org/export/embed.html?bbox=-0.2,51.4,0.0,51.6&layer=mapnik",
+                title: "OpenStreetMap — London area",
+                height: 300,
+                class: "rounded-md" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">16:9 aspect ratio</h3>
+          <%= ui :iframe,
+                src: "https://www.youtube.com/embed/dQw4w9WgXcQ",
+                title: "YouTube video embed example",
+                aspect: "16/9",
+                class: "rounded-md" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# IMAGE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="image" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Image</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Basic</h3>
+          <%= ui :image,
+                src: "https://placehold.co/600x300/e2e8f0/64748b?text=Basic+Image",
+                alt: "Basic image example",
+                width: 600, height: 300,
+                class: "rounded-md" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">With srcset</h3>
+          <%= ui :image,
+                src: "https://placehold.co/600x300/e2e8f0/64748b?text=Image+600w",
+                alt: "Responsive image with srcset",
+                srcset: "https://placehold.co/300x150/e2e8f0/64748b?text=300w 300w, https://placehold.co/600x300/e2e8f0/64748b?text=600w 600w",
+                sizes: "(max-width: 640px) 300px, 600px",
+                width: 600, height: 300,
+                class: "rounded-md" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# INDICATOR %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="indicator" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Indicator</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Dot (no count)</h3>
+        <div class="flex items-center gap-6">
+          <%= ui "indicator" do %>
+            <%= ui "avatar", fallback: "Alice" %>
+          <% end %>
+          <%= ui "indicator", variant: :destructive do %>
+            <%= ui "avatar", fallback: "Bob" %>
+          <% end %>
+          <%= ui "indicator", variant: :success do %>
+            <%= ui "avatar", fallback: "Carol" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With count</h3>
+        <div class="flex items-center gap-6">
+          <%= ui "indicator", count: 3 do %>
+            <%= ui "button", "Inbox", variant: :outline %>
+          <% end %>
+          <%= ui "indicator", count: 99, variant: :destructive do %>
+            <%= ui "button", "Notifications", variant: :outline %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="input" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Input</h2>
+
+      <div class="max-w-sm space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Text</h3>
+          <%= ui "input", placeholder: "Email address" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Password</h3>
+          <%= ui "input", type: "password", placeholder: "Password" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Disabled</h3>
+          <%= ui "input", placeholder: "Can't touch this", disabled: true %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With value</h3>
+          <%= ui "input", value: "alice@example.com" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# INPUT OTP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="input-otp" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Input OTP</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">6 digits (default)</h3>
+          <%= ui :input_otp, name: "otp" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">4 digits</h3>
+          <%= ui :input_otp, length: 4, name: "pin" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">With separator</h3>
+          <%= ui :input_otp, length: 6, separator: 3, name: "code" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# KBD %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="kbd" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">KBD</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Single keys</h3>
+        <div class="flex flex-wrap items-center gap-2">
+          <%= ui "kbd", "⌘" %>
+          <%= ui "kbd", "K" %>
+          <%= ui "kbd", "Enter" %>
+          <%= ui "kbd", "Esc" %>
+          <%= ui "kbd", "Tab" %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Shortcut combination</h3>
+        <div class="flex items-center gap-1 text-sm text-muted-foreground">
+          Press
+          <%= ui "kbd", "⌘" %>
+          +
+          <%= ui "kbd", "K" %>
+          to open the command palette.
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# LABEL %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="label" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Label</h2>
+
+      <div class="space-y-3 max-w-sm">
+        <div class="space-y-1">
+          <%= ui "label", "Email address", for: "demo-email" %>
+          <input id="demo-email" type="email" placeholder="you@example.com"
+                 class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm">
+        </div>
+        <div class="space-y-1">
+          <%= ui "label", label: "Password", for: "demo-password" %>
+          <input id="demo-password" type="password" placeholder="••••••••"
+                 class="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm shadow-sm">
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# LIST GROUP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="list-group" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">List Group</h2>
+
+      <div class="max-w-xs">
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Plain list</h3>
+        <%= ui "list_group" do %>
+          <%= ui "list_group_item", "Dashboard" %>
+          <%= ui "list_group_item", "Settings", active: true %>
+          <%= ui "list_group_item", "Billing" %>
+          <%= ui "list_group_item", "Help", variant: :muted %>
+        <% end %>
+      </div>
+
+      <div class="max-w-xs">
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With links</h3>
+        <%= ui "list_group" do %>
+          <%= ui "list_group_item", "Home",     href: "/up" %>
+          <%= ui "list_group_item", "Health",   href: "/up", active: true %>
+          <%= ui "list_group_item", "Back",     href: "/up" %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# MAP AREA %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="map-area" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Map / Area</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Clickable regions on an image</h3>
+        <%= ui :map_area,
+              src: "https://placehold.co/800x400/e2e8f0/64748b?text=Image+Map+(click+the+regions)",
+              alt: "Image map demo",
+              width: 800, height: 400,
+              areas: [
+                { shape: :rect,   coords: "0,0,266,400",   href: "#left",   alt: "Left region",   title: "Left region" },
+                { shape: :rect,   coords: "267,0,533,400",  href: "#center", alt: "Center region", title: "Center region" },
+                { shape: :rect,   coords: "534,0,800,400",  href: "#right",  alt: "Right region",  title: "Right region" }
+              ],
+              class: "rounded-md overflow-hidden" %>
+        <p class="mt-2 text-xs text-muted-foreground">Three equal clickable columns — inspect the element to see the <code>&lt;map&gt;</code> structure.</p>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Circle and polygon areas</h3>
+        <%= ui :map_area,
+              src: "https://placehold.co/600x300/e2e8f0/64748b?text=Circle+%26+Poly+regions",
+              alt: "Circle and polygon image map demo",
+              width: 600, height: 300,
+              areas: [
+                { shape: :circle, coords: "150,150,100",               href: "#circle", alt: "Circle area",   title: "Circle" },
+                { shape: :poly,   coords: "400,50,550,50,575,250,375,250", href: "#poly",   alt: "Polygon area", title: "Polygon" }
+              ],
+              class: "rounded-md overflow-hidden" %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# MEGA MENU %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="mega-menu" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Mega Menu</h2>
+
+      <div class="relative">
+        <%= ui :mega_menu, label: "Products", cols: 3 do |menu| %>
+          <% menu.with_column(
+              heading: "Analytics",
+              items: [
+                { title: "Dashboard",  href: "#", description: "Your metrics at a glance." },
+                { title: "Reports",    href: "#", description: "Scheduled PDF exports." },
+                { title: "Real-time",  href: "#", description: "Live event streaming." }
+              ]) %>
+          <% menu.with_column(
+              heading: "Marketing",
+              items: [
+                { title: "Campaigns",   href: "#", description: "Manage email campaigns." },
+                { title: "Automations", href: "#", description: "Set up trigger flows." }
+              ]) %>
+          <% menu.with_column(
+              heading: "Settings",
+              items: [
+                { title: "Team",    href: "#", description: "Invite and manage users." },
+                { title: "Billing", href: "#", description: "Plans and invoices." }
+              ]) %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# MENUBAR %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="menubar" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Menubar</h2>
+
+      <%= ui :menubar do |m| %>
+        <% m.with_menu(label: "File") do %>
+          <span class="<%= UI::MenubarComponent::LABEL_CLS %>">New</span>
+          <button class="<%= UI::MenubarComponent::ITEM %>">New Tab</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">New Window</button>
+          <div role="separator" class="<%= UI::MenubarComponent::SEPARATOR %>"></div>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Open...</button>
+          <div role="separator" class="<%= UI::MenubarComponent::SEPARATOR %>"></div>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Save</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Save As...</button>
+        <% end %>
+        <% m.with_menu(label: "Edit") do %>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Undo</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Redo</button>
+          <div role="separator" class="<%= UI::MenubarComponent::SEPARATOR %>"></div>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Cut</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Copy</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Paste</button>
+        <% end %>
+        <% m.with_menu(label: "View") do %>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Always Show Bookmarks Bar</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Always Show Full URLs</button>
+          <div role="separator" class="<%= UI::MenubarComponent::SEPARATOR %>"></div>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Reload</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Full Screen</button>
+        <% end %>
+        <% m.with_menu(label: "Help") do %>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Search Menu</button>
+          <div role="separator" class="<%= UI::MenubarComponent::SEPARATOR %>"></div>
+          <button class="<%= UI::MenubarComponent::ITEM %>">Keyboard Shortcuts</button>
+          <button class="<%= UI::MenubarComponent::ITEM %>">About</button>
+        <% end %>
+      <% end %>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# NAVBAR %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="navbar" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Navbar</h2>
+      <p class="text-sm text-muted-foreground">The full navbar is rendered at the top of this page. Below is a contained preview.</p>
+
+      <div class="overflow-hidden rounded-lg border border-border relative">
+        <%= ui :navbar,
+              class: "static border-b-0 shadow-none",
+              brand: "MyApp",
+              brand_href: "#",
+              items: [
+                { label: "Home",     href: "#", active: true },
+                { label: "Products", href: "#" },
+                { label: "Pricing",  href: "#" },
+                { label: "About",    href: "#" }
+              ] do %>
+          <%= ui :button, "Sign in", variant: :outline, size: :sm %>
+          <%= ui :button, "Get started", size: :sm %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# NAVIGATION MENU %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="navigation-menu" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Navigation Menu</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Plain links</h3>
+        <%= ui :navigation_menu do |nav| %>
+          <% nav.with_item(label: "Home",    href: "#", active: true) %>
+          <% nav.with_item(label: "About",   href: "#") %>
+          <% nav.with_item(label: "Pricing", href: "#") %>
+        <% end %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With flyout dropdown</h3>
+        <%= ui :navigation_menu do |nav| %>
+          <% nav.with_item(label: "Home", href: "#", active: true) %>
+          <% nav.with_item(label: "Products") do %>
+            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
+              <span class="font-medium">Analytics</span>
+              <span class="text-xs text-muted-foreground">Track your metrics.</span>
+            </a>
+            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
+              <span class="font-medium">Reports</span>
+              <span class="text-xs text-muted-foreground">Download PDF reports.</span>
+            </a>
+            <a href="#" class="flex flex-col gap-1 rounded-sm p-2 text-sm hover:bg-accent">
+              <span class="font-medium">Insights</span>
+              <span class="text-xs text-muted-foreground">AI-powered analysis.</span>
+            </a>
+          <% end %>
+          <% nav.with_item(label: "About", href: "#") %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# NUMBER INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="number-input" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Number Input</h2>
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
+          <%= ui :number_input, name: "qty", value: 1 %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With min/max/step</h3>
+          <%= ui :number_input, name: "age", value: 18, min: 0, max: 120, step: 1 %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# PAGINATION %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="pagination" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Pagination</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Middle page</h3>
+        <%= ui :pagination,
+              current_page: 5,
+              total_pages: 12,
+              url: ->(page) { "/?page=#{page}" } %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">First page (prev disabled)</h3>
+        <%= ui :pagination,
+              current_page: 1,
+              total_pages: 8,
+              url: ->(page) { "/?page=#{page}" } %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Last page (next disabled)</h3>
+        <%= ui :pagination,
+              current_page: 8,
+              total_pages: 8,
+              url: ->(page) { "/?page=#{page}" } %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# PICTURE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="picture" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Picture</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Art direction with sources</h3>
+        <%= ui :picture,
+              src: "https://placehold.co/800x400/e2e8f0/64748b?text=Fallback+800x400",
+              alt: "Responsive demo image",
+              width: 800, height: 400 do |p| %>
+          <% p.with_source(
+              srcset: "https://placehold.co/400x300/e2e8f0/64748b?text=Mobile+400x300",
+              media:  "(max-width: 640px)",
+              type:   "image/jpeg") %>
+          <% p.with_source(
+              srcset: "https://placehold.co/800x400/e2e8f0/64748b?text=Desktop+800x400",
+              media:  "(min-width: 641px)",
+              type:   "image/jpeg") %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# POPOVER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="popover" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Popover</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Below (default)</h3>
+          <%= ui :popover do |p| %>
+            <% p.with_trigger do %>
+              <%= ui :button, "Open Popover", variant: :outline %>
+            <% end %>
+            <div class="space-y-2">
+              <p class="font-medium text-sm">Dimensions</p>
+              <%= ui :form_field, label: "Width" do %>
+                <%= ui :input, placeholder: "100%" %>
+              <% end %>
+              <%= ui :form_field, label: "Height" do %>
+                <%= ui :input, placeholder: "auto" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Above</h3>
+          <%= ui :popover, side: :top do |p| %>
+            <% p.with_trigger do %>
+              <%= ui :button, "Popover above", variant: :outline %>
+            <% end %>
+            <p class="text-sm">This popover appears above the trigger.</p>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# PROGRESS %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="progress" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Progress</h2>
+
+      <div class="space-y-3 max-w-sm">
+        <div>
+          <p class="text-sm text-muted-foreground mb-1">0%</p>
+          <%= ui "progress", value: 0 %>
+        </div>
+        <div>
+          <p class="text-sm text-muted-foreground mb-1">33%</p>
+          <%= ui "progress", value: 33 %>
+        </div>
+        <div>
+          <p class="text-sm text-muted-foreground mb-1">75%</p>
+          <%= ui "progress", value: 75 %>
+        </div>
+        <div>
+          <p class="text-sm text-muted-foreground mb-1">100%</p>
+          <%= ui "progress", value: 100 %>
+        </div>
+        <div>
+          <p class="text-sm text-muted-foreground mb-1">3 of 10 (custom max)</p>
+          <%= ui "progress", value: 3, max: 10 %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# QR CODE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="qr-code" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">QR Code</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">From image URL</h3>
+          <%= ui :qr_code, src: "https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://github.com/alec-c4/view_primitives", alt: "GitHub repo QR code", size: 160 %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom size</h3>
+          <%= ui :qr_code, src: "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://example.com", alt: "Example.com QR code", size: 120 %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# RADIO GROUP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="radio-group" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Radio Group</h2>
+
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
+          <%= ui "radio_group", name: "plan", items: [
+            { value: "free",    label: "Free" },
+            { value: "pro",     label: "Pro" },
+            { value: "team",    label: "Team", checked: true }
+          ] %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# RANGE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="range" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Range</h2>
+      <div class="max-w-sm space-y-4">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default (0–100)</h3>
+          <%= ui :range, name: "volume", value: 40 %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Custom step</h3>
+          <%= ui :range, name: "opacity", min: 0, max: 1, step: 0.1, value: 0.7 %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# RATING %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="rating" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Rating</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Integer values</h3>
+        <div class="flex flex-col gap-2">
+          <%= ui "rating", value: 0 %>
+          <%= ui "rating", value: 2 %>
+          <%= ui "rating", value: 4 %>
+          <%= ui "rating", value: 5 %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom max</h3>
+        <%= ui "rating", value: 3, max: 10 %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# RATING INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="rating-input" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Rating Input</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Standalone (hover to preview)</h3>
+        <%= ui "rating_input", value: 3 %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Inside a form (name: sets hidden input)</h3>
+        <div class="max-w-xs space-y-3">
+          <%= form_with url: "/up", method: :post do |f| %>
+            <div class="space-y-1">
+              <p class="text-sm text-muted-foreground">How would you rate this component?</p>
+              <%= ui "rating_input", value: 0, name: "review[rating]" %>
+            </div>
+            <%= ui "button", "Submit", type: "submit", size: :sm %>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Custom max</h3>
+        <%= ui "rating_input", value: 6, max: 10 %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# RESIZABLE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="resizable" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Resizable</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal (drag the divider)</h3>
+          <%= ui :resizable, class: "h-40" do |r| %>
+            <% r.with_panel(default: 35) do %>
+              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                Left panel
+              </div>
+            <% end %>
+            <% r.with_panel do %>
+              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                Right panel
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical</h3>
+          <%= ui :resizable, direction: :vertical, class: "h-56" do |r| %>
+            <% r.with_panel(default: 40) do %>
+              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                Top panel
+              </div>
+            <% end %>
+            <% r.with_panel do %>
+              <div class="flex h-full items-center justify-center p-4 text-sm text-muted-foreground">
+                Bottom panel
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SCROLL AREA %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="scroll-area" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Scroll Area</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical (200px)</h3>
+          <%= ui :scroll_area, class: "h-48 w-64 rounded-md border border-border p-4" do %>
+            <% 20.times do |i| %>
+              <p class="text-sm py-1">Item <%= i + 1 %></p>
+            <% end %>
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal</h3>
+          <%= ui :scroll_area, orientation: :horizontal, class: "w-64 rounded-md border border-border p-4" do %>
+            <div class="flex gap-4" style="width: 600px">
+              <% 8.times do |i| %>
+                <div class="w-24 shrink-0 rounded-md bg-muted p-3 text-sm text-center">Card <%= i + 1 %></div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SEARCH INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="search-input" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Search Input</h2>
+      <div class="max-w-sm space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
+          <%= ui :search_input, name: "q" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Custom placeholder</h3>
+          <%= ui :search_input, name: "q", placeholder: "Search components…" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SELECT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="select" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Select</h2>
+
+      <div class="max-w-sm space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Array of strings</h3>
+          <%= ui "select", options: %w[Apple Banana Cherry], name: "fruit" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Value/label pairs</h3>
+          <%= ui "select",
+            options: [["us", "United States"], ["gb", "United Kingdom"], ["de", "Germany"]],
+            selected: "gb",
+            name: "country" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With blank option</h3>
+          <%= ui "select",
+            options: %w[Design Engineering Marketing],
+            include_blank: true,
+            name: "department" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SEPARATOR %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="separator" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Separator</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal (default)</h3>
+        <div class="space-y-2">
+          <p class="text-sm">Above the line</p>
+          <%= ui "separator" %>
+          <p class="text-sm">Below the line</p>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical</h3>
+        <div class="flex h-8 items-center gap-4">
+          <span class="text-sm">Left</span>
+          <%= ui "separator", orientation: :vertical %>
+          <span class="text-sm">Right</span>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SHEET %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="sheet" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Sheet</h2>
+
+      <div class="flex flex-wrap gap-3">
+        <% %i[right left top bottom].each do |side| %>
+          <%= ui :sheet, title: "Sheet (#{side})", description: "A slide-in panel from the #{side}.", side: side do |s| %>
+            <% s.with_trigger do %>
+              <%= ui :button, side.to_s.capitalize, variant: :outline %>
+            <% end %>
+            <p class="text-sm text-muted-foreground">Place any content here — forms, settings, details.</p>
+            <% s.with_footer do %>
+              <%= ui :button, "Close", variant: :outline, data: { action: "click->dialog#close" } %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SIDEBAR %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="sidebar" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Sidebar</h2>
+
+      <div class="relative h-80 overflow-hidden rounded-lg border border-border bg-background">
+        <%= ui :sidebar, brand: "Acme",
+          style: "position: relative; inset: auto; z-index: 1;" do |s| %>
+          <% s.with_group(label: "Main") do |g| %>
+            <% g.with_item(label: "Dashboard", href: "#", icon: :dashboard, active: true) %>
+            <% g.with_item(label: "Projects",  href: "#", icon: :folder) %>
+            <% g.with_item(label: "Tasks",     href: "#", icon: :tasks) %>
+          <% end %>
+          <% s.with_group(label: "Account") do |g| %>
+            <% g.with_item(label: "Settings", href: "#", icon: :settings) %>
+            <% g.with_item(label: "Billing",  href: "#", icon: :credit_card) %>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SKELETON %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="skeleton" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Skeleton</h2>
+
+      <div class="flex items-center gap-4 max-w-sm">
+        <%= ui "skeleton", class: "size-10 rounded-full" %>
+        <div class="flex-1 space-y-2">
+          <%= ui "skeleton", class: "h-4 w-full" %>
+          <%= ui "skeleton", class: "h-4 w-3/4" %>
+        </div>
+      </div>
+
+      <div class="max-w-sm space-y-2">
+        <%= ui "skeleton", class: "h-40 w-full rounded-xl" %>
+        <%= ui "skeleton", class: "h-4 w-full" %>
+        <%= ui "skeleton", class: "h-4 w-2/3" %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SPEED DIAL %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="speed-dial" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Speed Dial</h2>
+
+      <h3 class="text-sm font-medium text-muted-foreground">Bottom right</h3>
+      <div class="relative h-48 rounded-lg border border-border bg-muted/20">
+        <%= ui :speed_dial, style: "position: absolute; bottom: 24px; right: 24px;" do |d| %>
+          <% d.with_action(label: "New document", href: "#") %>
+          <% d.with_action(label: "Upload file",  href: "#") %>
+          <% d.with_action(label: "Share link",   href: "#") %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SPINNER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="spinner" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Spinner</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Sizes</h3>
+        <div class="flex items-center gap-6">
+          <%= ui "spinner", size: :sm %>
+          <%= ui "spinner" %>
+          <%= ui "spinner", size: :lg %>
+        </div>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">With button (loading state)</h3>
+        <div class="flex items-center gap-3">
+          <%= ui "button", variant: :outline, disabled: true do %>
+            <%= ui "spinner", size: :sm, class: "mr-2" %>
+            Saving…
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# STEPPER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="stepper" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Stepper</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Horizontal</h3>
+        <%= ui :stepper, steps: [
+          { label: "Account",  status: :complete },
+          { label: "Profile",  status: :current  },
+          { label: "Review",   status: :pending  },
+          { label: "Confirm",  status: :pending  }
+        ] %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Vertical with descriptions</h3>
+        <%= ui :stepper, orientation: :vertical, steps: [
+          { label: "Order placed",  description: "We received your order.",     status: :complete },
+          { label: "Processing",    description: "Your order is being packed.",  status: :current  },
+          { label: "Shipped",       description: "On its way to you.",           status: :pending  },
+          { label: "Delivered",     description: "Enjoy!",                       status: :pending  }
+        ] %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# SWITCH %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="switch" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Switch</h2>
+
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Off (default)</h3>
+          <%= ui "switch", label: "Dark mode", name: "dark_mode" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">On</h3>
+          <%= ui "switch", label: "Notifications enabled", name: "notifications", checked: true %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Without label</h3>
+          <%= ui "switch", name: "silent" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TABS %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="tabs" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Tabs</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Array API</h3>
+        <%= ui :tabs, items: [
+          { title: "Overview",  content: "This is the overview panel content." },
+          { title: "Analytics", content: "Analytics data goes here." },
+          { title: "Settings",  content: "Change your settings here." }
+        ] %>
+      </div>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Slot API</h3>
+        <%= ui :tabs do |t| %>
+          <% t.with_tab(title: "Tab One") do %>
+            <p class="text-sm text-muted-foreground">Content for the first tab.</p>
+          <% end %>
+          <% t.with_tab(title: "Tab Two") do %>
+            <p class="text-sm text-muted-foreground">Content for the second tab.</p>
+          <% end %>
+          <% t.with_tab(title: "Tab Three") do %>
+            <p class="text-sm text-muted-foreground">Content for the third tab.</p>
+          <% end %>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TAGS INPUT %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="tags-input" class="space-y-6">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Tags Input</h2>
+
+      <div class="flex flex-wrap items-start gap-6">
+        <div class="w-80">
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Basic</h3>
+          <%= ui :tags_input, name: "frameworks", options: [
+            "React", "Vue", "Angular", "Svelte", "Ember",
+            "Backbone", "Preact", "Solid", "Qwik", "Lit"
+          ] %>
+        </div>
+
+        <div class="w-80">
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Pre-selected values</h3>
+          <%= ui :tags_input, name: "languages",
+                values: ["ruby", "javascript"],
+                placeholder: "Add language…",
+                options: [
+                  { value: "ruby",       label: "Ruby" },
+                  { value: "javascript", label: "JavaScript" },
+                  { value: "python",     label: "Python" },
+                  { value: "go",         label: "Go" },
+                  { value: "rust",       label: "Rust" },
+                  { value: "elixir",     label: "Elixir" },
+                ] %>
+        </div>
+
+        <div class="w-80">
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">All selected</h3>
+          <%= ui :tags_input, name: "colors",
+                values: ["red", "green", "blue"],
+                options: [
+                  { value: "red",   label: "Red" },
+                  { value: "green", label: "Green" },
+                  { value: "blue",  label: "Blue" },
+                ] %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TEXTAREA %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="textarea" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Textarea</h2>
+
+      <div class="max-w-sm space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default</h3>
+          <%= ui "textarea", placeholder: "Write something..." %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Taller</h3>
+          <%= ui "textarea", placeholder: "Longer content...", class: "min-h-[160px]" %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Disabled</h3>
+          <%= ui "textarea", placeholder: "Read only", disabled: true %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TIMELINE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="timeline" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Timeline</h2>
+
+      <div class="flex flex-wrap gap-12">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-4">Default</h3>
+          <%= ui :timeline do |t| %>
+            <% t.with_item(date: "January 2025", title: "Project kicked off") %>
+            <% t.with_item(date: "February 2025", title: "Design complete", description: "Wireframes and visual specs approved by stakeholders") %>
+            <% t.with_item(date: "March 2025", title: "Development started") %>
+            <% t.with_item(date: "April 2025", title: "Beta released", description: "Shipped to internal testers") %>
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-4">With variants</h3>
+          <%= ui :timeline do |t| %>
+            <% t.with_item(date: "2025-01-10", title: "Deployment triggered", variant: :default) %>
+            <% t.with_item(date: "2025-01-10", title: "Health checks passed", description: "All 12 instances healthy", variant: :success) %>
+            <% t.with_item(date: "2025-01-10", title: "High memory usage", description: "p99 spiked to 87%", variant: :warning) %>
+            <% t.with_item(date: "2025-01-11", title: "Rollback initiated", variant: :destructive) %>
+            <% t.with_item(date: "2025-01-11", title: "Resolved — patch deployed", variant: :success) %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TIMEPICKER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="timepicker" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Timepicker</h2>
+
+      <div class="flex flex-wrap gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">24-hour</h3>
+          <%= ui :timepicker, name: "start_time" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">12-hour (AM/PM)</h3>
+          <%= ui :timepicker, format: :h12, name: "meeting_time" %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">30-minute steps</h3>
+          <%= ui :timepicker, step: 30, value: "09:00", name: "slot" %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TOASTER %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="toaster" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Toaster</h2>
+
+      <div class="space-y-3">
+        <p class="text-sm text-muted-foreground">Click a button to trigger a toast. The toaster container is fixed bottom-right on this page.</p>
+        <div class="flex flex-wrap gap-2">
+          <button type="button"
+            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
+            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'Changes saved successfully.' } }))">
+            Default
+          </button>
+          <button type="button"
+            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
+            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'Profile updated.', variant: 'success' } }))">
+            Success
+          </button>
+          <button type="button"
+            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
+            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { title: 'Warning', message: 'Session expires in 5 minutes.', variant: 'warning' } }))">
+            Warning
+          </button>
+          <button type="button"
+            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
+            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { title: 'Error', message: 'Failed to save changes.', variant: 'destructive' } }))">
+            Destructive
+          </button>
+          <button type="button"
+            class="inline-flex h-9 items-center rounded-md border border-input bg-background px-3 text-sm font-medium hover:bg-accent transition"
+            onclick="window.dispatchEvent(new CustomEvent('toaster:add', { detail: { message: 'New version available.', variant: 'info', duration: 0 } }))">
+            Info (no auto-dismiss)
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TOGGLE %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="toggle" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Toggle</h2>
+
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Default (not pressed)</h3>
+          <div class="flex gap-2">
+            <%= ui "toggle", "Bold" %>
+            <%= ui "toggle", "Italic", pressed: true %>
+            <%= ui "toggle", "Underline" %>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Sizes</h3>
+          <div class="flex items-center gap-2">
+            <%= ui "toggle", "Sm", size: :sm %>
+            <%= ui "toggle", "Default" %>
+            <%= ui "toggle", "Lg", size: :lg %>
+          </div>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">With icon</h3>
+          <%= ui "toggle" do %>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 4h8a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/><path d="M6 12h9a4 4 0 0 1 4 4 4 4 0 0 1-4 4H6z"/>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TOGGLE GROUP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="toggle-group" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Toggle Group</h2>
+
+      <div class="space-y-3">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Single selection</h3>
+          <%= ui "toggle_group", type: :single, value: "center" do %>
+            <%= ui "toggle", "Left",   value: "left" %>
+            <%= ui "toggle", "Center", value: "center", pressed: true %>
+            <%= ui "toggle", "Right",  value: "right" %>
+          <% end %>
+        </div>
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-2">Multiple selection</h3>
+          <%= ui "toggle_group", type: :multiple, value: ["bold", "underline"] do %>
+            <%= ui "toggle", "Bold",      value: "bold",      pressed: true %>
+            <%= ui "toggle", "Italic",    value: "italic" %>
+            <%= ui "toggle", "Underline", value: "underline", pressed: true %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# TOOLTIP %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="tooltip" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Tooltip</h2>
+
+      <div class="flex flex-wrap gap-6 items-end">
+        <% [[:top, "Top"], [:bottom, "Bottom"], [:left, "Left"], [:right, "Right"]].each do |side, label| %>
+          <div>
+            <h3 class="text-sm font-medium text-muted-foreground mb-3"><%= label %></h3>
+            <%= ui :tooltip, text: "#{label} tooltip", side: side do %>
+              <%= ui :button, label, variant: :outline %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# VIDEO %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="video" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">Video</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">With controls</h3>
+          <%= ui :video,
+                poster: "https://placehold.co/640x360/e2e8f0/64748b?text=Video+poster",
+                controls: true,
+                class: "rounded-md w-full" do |v| %>
+            <% v.with_source(src: "https://www.w3schools.com/html/mov_bbb.mp4", type: "video/mp4") %>
+            Your browser does not support the video element.
+          <% end %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">In Aspect Ratio wrapper</h3>
+          <%= ui :aspect_ratio, ratio: "16/9", class: "rounded-md overflow-hidden bg-muted" do %>
+            <%= ui :video,
+                  controls: true,
+                  class: "h-full w-full object-cover" do |v| %>
+              <% v.with_source(src: "https://www.w3schools.com/html/mov_bbb.mp4", type: "video/mp4") %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+
+    <%# ------------------------------------------------------------------ %>
+    <%# WYSIWYG %>
+    <%# ------------------------------------------------------------------ %>
+    <section id="wysiwyg" class="space-y-4">
+      <h2 class="text-xl font-semibold border-b border-border pb-2">WYSIWYG</h2>
+
+      <div>
+        <h3 class="text-sm font-medium text-muted-foreground mb-3">Trix (default)</h3>
+        <%= ui :wysiwyg, name: "body_trix",
+              placeholder: "Write something with Trix..." %>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Quill</h3>
+          <%= ui :wysiwyg, name: "body_quill", adapter: :quill,
+                placeholder: "Write something with Quill...",
+                height: 180 %>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-muted-foreground mb-3">Quill without toolbar</h3>
+          <%= ui :wysiwyg, name: "notes", adapter: :quill,
+                placeholder: "Plain text area, no toolbar...",
+                toolbar: false,
+                height: 180 %>
+        </div>
+      </div>
+    </section>
+
+  </div>
   </div>
 </div>

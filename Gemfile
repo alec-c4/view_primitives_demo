@@ -69,4 +69,4 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "view_primitives", "~> 0.1.3"
+gem "view_primitives"

@@ -21,35 +21,35 @@ module UI
     #   ui :embed, query: "Eiffel Tower, Paris"   # Google Maps — search query
 
     PROVIDERS = {
-      youtube: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups"},
-      vimeo: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups"},
-      spotify: {aspect: nil, sandbox: "allow-scripts allow-same-origin allow-popups"},
-      google_maps: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin"},
-      yandex_maps: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin"},
-      loom: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups"},
-      soundcloud: {aspect: nil, sandbox: "allow-scripts allow-same-origin allow-popups"},
-      x: {aspect: nil, sandbox: nil},
-      telegram: {aspect: nil, sandbox: nil},
-      facebook: {aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-popups allow-forms"}
+      youtube:     { aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups" },
+      vimeo:       { aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups" },
+      spotify:     { aspect: nil,    sandbox: "allow-scripts allow-same-origin allow-popups" },
+      google_maps: { aspect: "16/9", sandbox: "allow-scripts allow-same-origin" },
+      yandex_maps: { aspect: "16/9", sandbox: "allow-scripts allow-same-origin" },
+      loom:        { aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-presentation allow-popups" },
+      soundcloud:  { aspect: nil,    sandbox: "allow-scripts allow-same-origin allow-popups" },
+      x:           { aspect: nil,    sandbox: nil },
+      telegram:    { aspect: nil,    sandbox: nil },
+      facebook:    { aspect: "16/9", sandbox: "allow-scripts allow-same-origin allow-popups allow-forms" }
     }.freeze
 
     WIDGET_PROVIDERS = %i[x telegram].freeze
 
     DOMAIN_MAP = {
-      /youtube\.com|youtu\.be/i => :youtube,
-      /vimeo\.com/i => :vimeo,
-      /open\.spotify\.com/i => :spotify,
-      /loom\.com/i => :loom,
-      /soundcloud\.com/i => :soundcloud,
-      /(?:twitter|x)\.com/i => :x,
-      /t\.me|telegram\.org/i => :telegram,
-      /facebook\.com|fb\.com/i => :facebook,
+      /youtube\.com|youtu\.be/i                         => :youtube,
+      /vimeo\.com/i                                     => :vimeo,
+      /open\.spotify\.com/i                             => :spotify,
+      /loom\.com/i                                      => :loom,
+      /soundcloud\.com/i                                => :soundcloud,
+      /(?:twitter|x)\.com/i                             => :x,
+      /t\.me|telegram\.org/i                            => :telegram,
+      /facebook\.com|fb\.com/i                          => :facebook,
       /maps\.google|google\.com\/maps|maps\.app\.goo\.gl/i => :google_maps,
-      /yandex\.(ru|com)\/maps/i => :yandex_maps
+      /yandex\.(ru|com)\/maps/i                         => :yandex_maps
     }.freeze
 
-    WRAPPER_CLS = "overflow-hidden rounded-md"
-    DARK_WRAPPER_CLS = "overflow-hidden rounded-md bg-black"
+    WRAPPER_CLS      = "overflow-hidden rounded-md #{UI::Styles::BORDER} bg-card shadow-xs"
+    DARK_WRAPPER_CLS = "overflow-hidden rounded-md #{UI::Styles::BORDER} bg-black shadow-xs"
 
     def self.detect_provider(url)
       DOMAIN_MAP.each { |pattern, provider| return provider if url.to_s.match?(pattern) }
@@ -57,14 +57,14 @@ module UI
     end
 
     def initialize(url: nil, query: nil, aspect: nil, height: nil, title: nil, **html_attrs)
-      @type = query ? :google_maps : self.class.detect_provider(url)
-      @url = url
-      @query = query
+      @type   = query ? :google_maps : self.class.detect_provider(url)
+      @url    = url
+      @query  = query
       @aspect = aspect || PROVIDERS.dig(@type, :aspect)
       @height = height || default_height
-      @title = title || default_title
+      @title  = title  || default_title
       @extra_class = html_attrs.delete(:class)
-      @html_attrs = html_attrs
+      @html_attrs  = html_attrs
     end
 
     def call
@@ -83,7 +83,7 @@ module UI
 
     def widget_markup
       case @type
-      when :x then x_widget
+      when :x        then x_widget
       when :telegram then telegram_widget
       end
     end
@@ -94,7 +94,7 @@ module UI
 
       content_tag(:div,
         class: cn(WRAPPER_CLS, @extra_class),
-        data: {controller: "embed", embed_provider_value: "x", embed_post_id_value: tweet_id},
+        data:  { controller: "embed", embed_provider_value: "x", embed_post_id_value: tweet_id },
         **@html_attrs) do
         content_tag(:blockquote, class: "twitter-tweet", "data-dnt": "true") do
           tag.a(href: "https://twitter.com/i/status/#{tweet_id}")
@@ -109,7 +109,7 @@ module UI
 
       content_tag(:div, "",
         class: cn(WRAPPER_CLS, @extra_class),
-        data: {controller: "embed", embed_provider_value: "telegram", embed_post_id_value: post_id},
+        data:  { controller: "embed", embed_provider_value: "telegram", embed_post_id_value: post_id },
         **@html_attrs)
     end
 
@@ -121,7 +121,7 @@ module UI
 
       sandbox = PROVIDERS.dig(@type, :sandbox)
       iframe_attrs = {
-        src: embed_url, title: @title, loading: "lazy",
+        src:  embed_url, title: @title, loading: "lazy",
         class: "w-full h-full border-0 block",
         allowfullscreen: true,
         allow: "autoplay; fullscreen; picture-in-picture"
@@ -139,14 +139,14 @@ module UI
 
     def build_embed_url
       case @type
-      when :youtube then youtube_url
-      when :vimeo then vimeo_url
-      when :spotify then spotify_url
+      when :youtube     then youtube_url
+      when :vimeo       then vimeo_url
+      when :spotify     then spotify_url
       when :google_maps then google_maps_url
       when :yandex_maps then yandex_maps_url
-      when :loom then loom_url
-      when :soundcloud then soundcloud_url
-      when :facebook then facebook_url
+      when :loom        then loom_url
+      when :soundcloud  then soundcloud_url
+      when :facebook    then facebook_url
       end
     end
 
@@ -247,7 +247,7 @@ module UI
 
     def default_height
       case @type
-      when :spotify then 152
+      when :spotify    then 152
       when :soundcloud then 166
       else 400
       end
@@ -255,16 +255,16 @@ module UI
 
     def default_title
       {
-        youtube: "YouTube video",
-        vimeo: "Vimeo video",
-        spotify: "Spotify player",
+        youtube:     "YouTube video",
+        vimeo:       "Vimeo video",
+        spotify:     "Spotify player",
         google_maps: "Google Maps",
         yandex_maps: "Yandex Maps",
-        loom: "Loom video",
-        soundcloud: "SoundCloud player",
-        x: "Post on X",
-        telegram: "Telegram post",
-        facebook: "Facebook video"
+        loom:        "Loom video",
+        soundcloud:  "SoundCloud player",
+        x:           "Post on X",
+        telegram:    "Telegram post",
+        facebook:    "Facebook video"
       }.fetch(@type, "Embedded content")
     end
   end
