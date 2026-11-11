@@ -128,3 +128,23 @@ jobs:
           name: screenshots
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
+
+  ci:
+    name: CI
+    if: always()
+    needs: [scan_ruby, scan_js, lint, test, system-test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require the existing CI jobs to succeed
+        env:
+          JOB_0_RESULT: ${{ needs.scan_ruby.result }}
+          JOB_1_RESULT: ${{ needs.scan_js.result }}
+          JOB_2_RESULT: ${{ needs.lint.result }}
+          JOB_3_RESULT: ${{ needs.test.result }}
+          JOB_4_RESULT: ${{ needs['system-test'].result }}
+        run: |
+          test "$JOB_0_RESULT" = success
+          test "$JOB_1_RESULT" = success
+          test "$JOB_2_RESULT" = success
+          test "$JOB_3_RESULT" = success
+          test "$JOB_4_RESULT" = success
